@@ -1,0 +1,26 @@
+{% extends 'portal_base.html' %}
+{% block title %}Edit Notice{% endblock %}
+{% block content %}
+<div class="d-flex align-items-center justify-content-between mb-4">
+  <div>
+    <h1>Edit Notice</h1>
+    <p class="text-muted">Update the notice content that students will see on their dashboard.</p>
+  </div>
+  <a href="{{ url_for('portal.manage_notices') }}" class="btn btn-outline-secondary">Back to notices</a>
+</div>
+<div class="card card-section shadow-sm">
+  <div class="card-body">
+    <form method="post">
+      <div class="mb-3">
+        <label class="form-label">Title</label>
+        <input class="form-control" name="title" value="{{ item.title }}" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Content</label>
+        <textarea class="form-control" name="content" rows="4" required>{{ item.content }}</textarea>
+      </div>
+      <button class="btn btn-primary">Save changes</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

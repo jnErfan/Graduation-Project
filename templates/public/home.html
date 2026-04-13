@@ -1,0 +1,286 @@
+{% extends 'base.html' %}
+{% block title %}JSAFC{% endblock %}
+{% block content %}
+<section class="hero-landing overflow-hidden">
+  <div class="container py-5">
+    <div class="row align-items-center gy-5">
+      <div class="col-lg-6">
+        <span class="eyebrow text-primary fw-semibold">Jiangsu Vocational College of Agriculture and Forestry</span>
+        <h1 class="display-3 fw-bold hero-title">Study in China with JSAFC</h1>
+        <p class="lead text-secondary hero-text">The School of International Education at Jiangsu Vocational College of Agriculture and Forestry welcomes international students with high-quality vocational programs, scholarships, and global exchange opportunities.</p>
+        <div class="d-flex flex-wrap gap-3 mt-4">
+          <a href="{{ url_for('public.admissions') }}" class="btn btn-primary btn-lg">Apply Now</a>
+          <a href="{{ url_for('public.contact') }}" class="btn btn-primary btn-lg">Contact Us</a>
+        </div>
+        <div class="row g-3 mt-5  stats-row hero-stat-card bg-white shadow-sm  rounded-1  pb-3 text-center">
+          <div class="col-sm-4">
+            <div class="">
+              <h2 class="mb-1">96%</h2>
+              <p class="mb-0 text-muted">EMPLOYMENT RATE</p>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="">
+              <h2 class="mb-1">12:1</h2>
+              <p class="mb-0 text-muted">TEACHERS RATIO</p>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="">
+              <h2 class="mb-1">20+</h2>
+              <p class="mb-0 text-muted">PROGRAMS</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 position-relative">
+        <div class="rounded-4 overflow-hidden shadow-xl position-relative justify-content-center align-items-center d-flex">
+          <img src="http://en.sie.jsafc.edu.cn/images/22/03/29/1so4rgysk0/326B4F6699020C6EF1FD842EB9F_69DDCB8A_71C63.jpg" loading="lazy" class="img-fluid" alt="University campus landscaping">
+          <div class="hero-badge position-absolute"><i class="bi bi-award"></i> Excellence</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section py-0">
+        <div class="event-strip p-4 p-md-5 bg-dark text-white d-flex flex-column flex-md-row align-items-center justify-content-between gap-4">
+          <div class="d-flex align-items-center gap-4">
+            <div class="event-date rounded-4 bg-primary text-white d-flex flex-column align-items-center justify-content-center">
+              <span class="fs-1 fw-bold">15</span>
+              <small class="text-uppercase">MAY</small>
+            </div>
+            <div>
+              <h3 class="h4 fw-bold mb-2">Spring Semester Open House</h3>
+              <p class="mb-0 text-white-75">Join us to explore campus facilities, meet our faculty, and learn about scholarship opportunities.</p>
+            </div>
+          </div>
+          <div class="text-md-end">
+            <a href="#" class="btn btn-outline-light btn-lg">RSVP Now</a>
+            <p class="text-white-50 mb-0 mt-2">Starts in 3 weeks</p>
+    </div>
+  </div>
+</section>
+
+<section class="section section-light py-5">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-md-3">
+        <div class="metric-card rounded-4 shadow-sm h-100 text-center bg-white p-4">
+          <div class="value-icon mb-3"><i class="bi bi-award"></i></div>
+          <div class="metric-value">250+</div>
+          <h5 class="metric-label mt-3">International Awards</h5>
+          <p class="text-muted mb-0">Recognized for international student education and quality programs.</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="metric-card rounded-4 shadow-sm h-100 text-center bg-white p-4">
+          <div class="value-icon mb-3"><i class="bi bi-building"></i></div>
+          <div class="metric-value">8</div>
+          <h5 class="metric-label mt-3">Campuses</h5>
+          <p class="text-muted mb-0">Supporting vocational training across multiple campuses.</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="metric-card rounded-4 shadow-sm h-100 text-center bg-white p-4">
+          <div class="value-icon mb-3"><i class="bi bi-people"></i></div>
+          <div class="metric-value">65+</div>
+          <h5 class="metric-label mt-3">Countries</h5>
+          <p class="text-muted mb-0">Students from over 65 nations.</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="metric-card rounded-4 shadow-sm h-100 text-center bg-white p-4">
+          <div class="value-icon mb-3"><i class="bi bi-globe2"></i></div>
+          <div class="metric-value">Top 20</div>
+          <h5 class="metric-label mt-3">Ranked Programs</h5>
+          <p class="text-muted mb-0">Quality vocational programs with global recognition.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-light py-5">
+  <div class="container">
+    <div class="row align-items-center gy-5">
+      <div class="col-lg-6">
+        <span class="eyebrow text-primary fw-semibold">Our Story</span>
+        <h2 class="display-5 fw-bold mb-4">Educating Minds, Inspiring Hearts</h2>
+        <p class="lead text-secondary mb-5">JSAFC & Its International Education School</p>
+
+        <div class="timeline-list">
+          <div class="timeline-item mb-4">
+            <div class="timeline-date">1923</div>
+            <p>Founded: 1923 — one of China’s oldest vocational institutions with a long history in agricultural and technical education.</p>
+          </div>
+          <div class="timeline-item mb-4">
+            <div class="timeline-date">2022</div>
+            <p>Awarded Advanced Collective of Education for Foreign Students in Jiangsu Province — recognition for excellence in international student support and services.</p>
+          </div>
+          <div class="timeline-item mb-4">
+            <div class="timeline-date">2023</div>
+            <p>Recognized in provincial education quality evaluations with high-level development rankings.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">2024</div>
+            <p>Received awards for student community excellence and ideological education achievements at national university events.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="rounded-4 overflow-hidden shadow-xl story-image-card">
+          <img src="{{ url_for('static', filename='images/campus.png') }}" class="img-fluid" alt="University courtyard">
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-4 mt-5">
+      <div class="col-md-6">
+        <div class="story-card rounded-4 bg-white shadow-sm h-100 p-4">
+          <h5 class="story-card-title mb-3">Our Mission</h5>
+          <p class="text-muted mb-0">Empower students from around the world by providing a high-quality education that combines innovative teaching with real-world experience.</p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="story-card rounded-4 bg-white shadow-sm h-100 p-4">
+          <h5 class="story-card-title mb-3">Our Vision</h5>
+          <p class="text-muted mb-0">Shape future leaders who are not only experts in their fields but also culturally aware and socially responsible.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section py-5">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-6">
+        <span class="section-label">Latest News</span>
+        <h2 class="section-title">Admissions and campus updates</h2>
+        <ul class="list-unstyled mt-4">
+          <li class="mb-3"><a href="http://en.sie.jsafc.edu.cn/info/1011/1251.htm" class="text-dark fw-semibold">SIE participated in 2023 "Belt and Road" Youth Sports Exchange Week (Jiangsu)</a><br><small class="text-muted">May 29, 2023</small></li>
+          <li class="mb-3"><a href="http://en.sie.jsafc.edu.cn/info/1011/1252.htm" class="text-dark fw-semibold">Lectures on legal publicity and safety held for SIE students</a><br><small class="text-muted">Mar 29, 2023</small></li>
+          <li class="mb-3"><a href="http://en.sie.jsafc.edu.cn/info/1011/1253.htm" class="text-dark fw-semibold">JSAFC awarded Advanced Collective of Education for Foreign Students in Jiangsu Province</a><br><small class="text-muted">Jan 03, 2023</small></li>
+        </ul>
+        <a href="http://en.sie.jsafc.edu.cn/News.htm" class="btn btn-outline-primary btn-lg mt-3">Read More News</a>
+      </div>
+      <div class="col-lg-6">
+        <div class="rounded-4 overflow-hidden shadow-xl">
+          <img src="http://en.sie.jsafc.edu.cn/images/22/03/29/1so4rgysk0/457244CADAC756A307382AD4D09_233420C4_8C902.jpg" class="img-fluid" alt="Campus landscape">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section py-5 bg-light rounded-4">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="section-title">Campus Landscape</h2>
+      <p class="text-muted mx-auto" style="max-width: 680px;">Experience the JSAFC campus through our international education programs and student support services.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-sm-6 col-lg-4">
+        <div class="rounded-4 overflow-hidden shadow-sm">
+          <img src="http://en.sie.jsafc.edu.cn/images/22/03/29/1so4rgysk0/F84E22CD2EBEEBF9138FD679A38_4AA6BA9B_AFB29.jpg" class="img-fluid" alt="Campus life">
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-4 justify-content-center align-items-center d-flex">
+        <div class="rounded-4 overflow-hidden shadow-sm">
+          <img src="http://en.sie.jsafc.edu.cn/images/22/03/29/1so4rgysk0/8DA5D1606C9A2AC68694F6ECF2F_C8142906_DC148.jpg" class="img-fluid" alt="Campus walkway">
+        </div>
+      </div>
+      <div class="col-lg-4 d-flex align-items-center">
+        <div>
+          <h3>International Student Life</h3>
+          <p class="text-muted">Join a diverse student community with activities, cultural exchange opportunities, and academic support.</p>
+          <a href="{{ url_for('public.about') }}" class="btn btn-primary btn-lg">Learn More</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section py-5">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="section-title">Featured Programs</h2>
+      <p class="text-muted mx-auto" style="max-width: 680px;">Select diploma programs with strong career outcomes and practical training.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <div class="program-card rounded-4 p-4 shadow-sm bg-white h-100">
+          <h5>Business Management</h5>
+          <p class="text-muted">Practical training for future managers and administrators.</p>
+          <div class="d-flex justify-content-between text-muted small mt-3">
+            <span>3 Years</span>
+            <span>Diploma</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="program-card rounded-4 p-4 shadow-sm bg-white h-100">
+          <h5>Digital Marketing</h5>
+          <p class="text-muted">Programs focused on digital media, communications, and business operations.</p>
+          <div class="d-flex justify-content-between text-muted small mt-3">
+            <span>2 Years</span>
+            <span>Certificate</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="program-card rounded-4 p-4 shadow-sm bg-white h-100">
+          <h5>Health Sciences</h5>
+          <p class="text-muted">Career-focused coursework in health and clinical services.</p>
+          <div class="d-flex justify-content-between text-muted small mt-3">
+            <span>5 Years</span>
+            <span>Diploma</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section py-5 bg-light">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="section-title">Student Testimonials</h2>
+      <p class="text-muted mx-auto" style="max-width: 680px;">Hear from international students about their JSAFC experience.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <div class="testimonial-card rounded-4 shadow-sm bg-white p-5 text-center h-100">
+          <div class="testimonial-avatar mx-auto mb-4">
+            <img src="http://en.sie.jsafc.edu.cn/__local/0/84/A2/EB1E04BB4F966B9108B3A8D8658_DD5802E6_7646A.jpg" alt="Student testimonial" class="rounded-circle">
+          </div>
+          <p class="text-muted">"CHANTHAPHENG TOULAVANH，Laotian, enrolled in E-commerce in 2016, now working in the Lao Ministry of Defense。"</p>
+          <h5 class="mt-4 mb-1">CHANTHAPHENG TOULAVANH</h5>
+          <p class="text-muted small">International Student</p>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="testimonial-card rounded-4 shadow-sm bg-white p-5 text-center h-100">
+          <div class="testimonial-avatar mx-auto mb-4">
+            <img src="http://en.sie.jsafc.edu.cn/__local/8/8B/9A/A4DBFE8754679C04769860F289B_387C28C2_56E67.jpg" alt="Student testimonial" class="rounded-circle">
+          </div>
+          <p class="text-muted">"Moroccan, enrolled in computer application technology in 2018, and won the Outstanding International Student Scholarship of Nanjing University"</p>
+          <h5 class="mt-4 mb-1">​ABIR BOULIT</h5>
+          <p class="text-muted small">Diploma Program Student</p>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="testimonial-card rounded-4 shadow-sm bg-white p-5 text-center h-100">
+          <div class="testimonial-avatar mx-auto mb-4">
+            <img src="https://images.pexels.com/photos/1130626/pexels-photo-1130626.jpeg?auto=compress&cs=tinysrgb&w=200" alt="Student testimonial" class="rounded-circle">
+          </div>
+          <p class="text-muted">"The campus offers quiet study spaces, practical labs, and a welcoming environment for international students."</p>
+          <h5 class="mt-4 mb-1">Sara Kim</h5>
+          <p class="text-muted small">Chinese Program Student</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

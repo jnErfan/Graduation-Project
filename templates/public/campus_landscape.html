@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Campus Landscape | JSAFC SIE{% endblock %}
+{% block content %}
+<section class="py-5 page-header bg-secondary text-white">
+  <div class="row align-items-center">
+    <div class="col-lg-7">
+      <span class="page-badge text-white">Campus Landscape</span>
+      <h1 class="section-title text-white">Explore the campus spaces that shape student life.</h1>
+      <p class="text-white-75">From study gardens to modern learning centers, discover the facilities and atmosphere that make our campus unique.</p>
+    </div>
+  </div>
+</section>
+
+<section class="py-5">
+  <div class="row g-4">
+    {% for item in landscapes %}
+    <div class="col-md-6">
+      <div class="card shadow-sm border-0 overflow-hidden rounded-4 h-100">
+        {% if item.image_url %}
+        <img src="{{ item.image_url }}" class="card-img-top" alt="Campus landscape image">
+        {% endif %}
+      </div>
+    </div>
+    {% else %}
+    <div class="col-12">
+      <div class="alert alert-secondary">There are no campus landscape entries yet. Please check back soon.</div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

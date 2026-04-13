@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block title %}Teachers & Authority | JSAFC SIE{% endblock %}
+{% block content %}
+<section class="py-5 page-header bg-secondary text-white">
+  <div class="row align-items-center">
+    <div class="col-lg-7">
+      <span class="page-badge text-white">Teachers & Authority</span>
+      <h1 class="section-title text-white">Meet the academic leaders and staff shaping our mission.</h1>
+      <p class="text-white-75">Profiles of faculty, administrators, and authority figures who guide student success and campus direction.</p>
+    </div>
+  </div>
+</section>
+
+<section class="py-5">
+  <div class="row g-4">
+    {% for leader in authorities %}
+    <div class="col-md-6">
+      <div class="card shadow-sm border-0 rounded-4 h-100">
+        <div class="row g-0 h-100 align-items-center">
+          <div class="col-md-5">
+            {% if leader.image_url %}
+            <img src="{{ leader.image_url }}" class="img-fluid rounded-start h-100 object-fit-cover" alt="{{ leader.name }}">
+            {% else %}
+            <div class="bg-secondary text-white d-flex align-items-center justify-content-center h-100 rounded-start">
+              <span class="fs-3">{{ leader.name[0] }}</span>
+            </div>
+            {% endif %}
+          </div>
+          <div class="col-md-7">
+            <div class="card-body">
+              <h3 class="h5 mb-1">{{ leader.name }}</h3>
+              <p class="text-primary mb-2">{{ leader.role }}</p>
+              <p class="text-muted small">{{ leader.bio }}</p>
+              {% if leader.profile_url %}
+              <a href="{{ leader.profile_url }}" class="text-primary">Read full profile</a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% else %}
+    <div class="col-12">
+      <div class="alert alert-secondary">No teacher or authority profiles have been published yet.</div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

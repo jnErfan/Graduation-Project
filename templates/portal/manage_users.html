@@ -1,0 +1,124 @@
+{% extends 'portal_base.html' %}
+{% block title %}Manage Users{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h1 class="mb-1">Manage Students</h1>
+    <p class="text-muted">Create, edit, and remove student and faculty accounts.</p>
+  </div>
+</div>
+<div class="row g-4">
+  <div class="col-xl-5">
+    <div class="card card-section">
+      <div class="card-body">
+        <h5 class="card-title">Add New User</h5>
+        <form method="post">
+          <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input type="text" name="name" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" name="email" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input type="password" name="password" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Role</label>
+            <select name="role_id" class="form-select" required>
+              <option value="" selected disabled>Select role</option>
+              {% for role in roles %}
+              <option value="{{ role.id }}">{{ role.name|title }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Department</label>
+            <select name="department_id" class="form-select">
+              <option value="">No department</option>
+              {% for department in departments %}
+              <option value="{{ department.id }}">{{ department.name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Create Account</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-7">
+    <div class="card card-section">
+      <div class="card-body">
+        <h5 class="card-title">Active Users</h5>
+        <div class="table-responsive mt-3">
+          <table class="table table-hover align-middle">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Department</th>
+                <th class="text-end">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for student in students %}
+              <tr>
+                <td>{{ student.name }}</td>
+                <td>{{ student.email }}</td>
+                <td>{{ student.role_name|title }}</td>
+                <td>{{ student.department_name or '—' }}</td>
+                <td class="text-end table-actions">
+                  <a href="{{ url_for('portal.edit_user', user_id=student.id) }}" class="btn btn-sm btn-outline-secondary">Edit</a>
+                  <a href="{{ url_for('portal.delete_user_account', user_id=student.id) }}" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+              </tr>
+              {% else %}
+              <tr><td colspan="5" class="text-center">No student accounts found.</td></tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row g-4 mt-4">
+  <div class="col-12">
+    <div class="card card-section">
+      <div class="card-body">
+        <h5 class="card-title">Faculty Accounts</h5>
+        <div class="table-responsive mt-3">
+          <table class="table table-hover align-middle">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Department</th>
+                <th class="text-end">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for member in faculty %}
+              <tr>
+                <td>{{ member.name }}</td>
+                <td>{{ member.email }}</td>
+                <td>{{ member.department_name or '—' }}</td>
+                <td class="text-end table-actions">
+                  <a href="{{ url_for('portal.edit_user', user_id=member.id) }}" class="btn btn-sm btn-outline-secondary">Edit</a>
+                  <a href="{{ url_for('portal.delete_user_account', user_id=member.id) }}" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+              </tr>
+              {% else %}
+              <tr><td colspan="4" class="text-center">No faculty accounts found.</td></tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

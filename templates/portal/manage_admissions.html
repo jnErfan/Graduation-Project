@@ -1,0 +1,43 @@
+{% extends 'portal_base.html' %}
+{% block title %}Manage Admissions{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h1 class="mb-1">Manage Admissions</h1>
+    <p class="text-muted">Add admission cycles and application links for prospective students.</p>
+  </div>
+</div>
+<div class="card card-section mb-4">
+  <div class="card-body">
+    <form method="post">
+      <div class="row g-3">
+        <div class="col-md-6"><input class="form-control" name="title" placeholder="Admissions title" required></div>
+        <div class="col-md-6"><input class="form-control" name="application_url" placeholder="Application URL"></div>
+        <div class="col-md-12"><textarea class="form-control" name="description" rows="3" placeholder="Description" required></textarea></div>
+        <div class="col-md-6"><input class="form-control" name="start_date" type="date" placeholder="Start date"></div>
+        <div class="col-md-6"><input class="form-control" name="end_date" type="date" placeholder="End date"></div>
+        <div class="col-md-12"><button class="btn btn-primary">Add Admission</button></div>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="table-responsive">
+  <table class="table table-striped align-middle">
+    <thead><tr><th>Title</th><th>Dates</th><th>Actions</th></tr></thead>
+    <tbody>
+      {% for admission in admissions %}
+      <tr>
+        <td>{{ admission.title }}</td>
+        <td>{{ admission.start_date or '—' }} &ndash; {{ admission.end_date or '—' }}</td>
+        <td>
+          <a href="{{ url_for('portal.edit_admission', admission_id=admission.id) }}" class="btn btn-sm btn-secondary">Edit</a>
+          <a href="{{ url_for('portal.delete_admission_item', admission_id=admission.id) }}" class="btn btn-sm btn-danger">Delete</a>
+        </td>
+      </tr>
+      {% else %}
+      <tr><td colspan="3">No admission entries available.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

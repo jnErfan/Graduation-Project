@@ -1,0 +1,182 @@
+{% extends 'base.html' %}
+{% block title %}About | JSAFC SIE{% endblock %}
+{% block content %}
+<section class="py-5 page-header">
+  <div class="row align-items-center">
+    <div class="col-md-7">
+      <span class="page-badge">About</span>
+      <h1 class="section-title">About the School of International Education</h1>
+      <p class="text-muted">The School of International Education at Jiangsu Vocational College of Agriculture and Forestry is dedicated to international cooperation, vocational excellence, and student development.</p>
+    </div>
+    <div class="col-md-5 text-md-end">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb justify-content-md-end mb-0">
+          <li class="breadcrumb-item"><a href="{{ url_for('public.home') }}">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">About</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+</section>
+
+<section class="py-5 page-card">
+  <div class="row align-items-center g-4">
+    <div class="col-lg-6">
+      <div class="card-hero">
+        <img src="http://en.sie.jsafc.edu.cn/images/22/03/29/1so4rgysk0/36B8D3C1E40D2FDC09F58E669F2_FB4DA367_96A1A.jpg?auto=compress&cs=tinysrgb&w=1200" class="img-fluid" alt="JSAFC campus building">
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <h2 class="section-title">International education with vocational strength</h2>
+      <p class="text-muted">SIE provides international students with diploma programs taught in Chinese and English, strong academic support, and access to global exchange networks.</p>
+      <div class="stats-panel mt-4">
+        <div class="stat-box">
+          <h3>8</h3>
+          <p>Campuses</p>
+        </div>
+        <div class="stat-box">
+          <h3>65+</h3>
+          <p>Countries represented</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-5">
+  <div class="row g-4">
+    <div class="col-md-4">
+      <div class="feature-card h-100">
+        <div class="feature-icon"><i class="bi bi-people"></i></div>
+        <h5 class="mt-3">Global Partnerships</h5>
+        <p>International cooperation and exchange programs that strengthen academic links across regions.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="feature-card h-100">
+        <div class="feature-icon"><i class="bi bi-journal-bookmark"></i></div>
+        <h5 class="mt-3">Vocational Training</h5>
+        <p>Practical, career-oriented programs designed to prepare students for the workforce.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="feature-card h-100">
+        <div class="feature-icon"><i class="bi bi-globe2"></i></div>
+        <h5 class="mt-3">Student Support</h5>
+        <p>Comprehensive guidance for admissions, registration, housing, and cultural adjustment.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-5 page-header">
+  <div class="row align-items-center">
+    <div class="col-md-7">
+      <span class="page-badge">Campus & Facilities</span>
+      <h1 class="section-title">Discover our modern campus facilities.</h1>
+      <p class="text-muted">Our campus is designed to support inquiry, creativity, and student wellbeing across every discipline.</p>
+    </div>
+    <div class="col-md-5 text-md-end">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb justify-content-md-end mb-0">
+          <li class="breadcrumb-item"><a href="{{ url_for('public.home') }}">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Campus Facilities</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+</section>
+
+<section class="py-5 page-card">
+  <div class="row align-items-center g-4">
+    <div class="col-lg-6">
+      <span class="page-badge">Campus Excellence</span>
+      <h2 class="section-title">Discover our modern campus facilities.</h2>
+      <p class="text-muted">From research labs to wellness centers, our spaces are engineered to inspire student success.</p>
+      <div class="row g-3 mt-4 stats-panel">
+        <div class="col-4">
+          <div class="stat-box">
+            <h3>95+</h3>
+            <p>Modern buildings</p>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="stat-box">
+            <h3>200</h3>
+            <p>Acre campus</p>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="stat-box">
+            <h3>25k+</h3>
+            <p>Students</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="card-hero position-relative">
+        <img src="http://en.sie.jsafc.edu.cn/images/22/03/29/1so4rgysk0/8DA5D1606C9A2AC68694F6ECF2F_C8142906_DC148.jpg" class="img-fluid" alt="Campus facility">
+        <div class="position-absolute bottom-0 start-0 m-4  rounded-pill bg-white shadow-sm">
+          <span class="course-tag">Academic</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-5">
+  <div class="row g-4">
+    <div class="col-md-4">
+      <div class="contact-info-card h-100">
+        <h5>Innovation Labs</h5>
+        <p class="text-muted">High-tech workspaces for engineering, science, and design collaboration.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="contact-info-card h-100">
+        <h5>Library resources</h5>
+        <p class="text-muted">Extensive digital and print collections for research, study, and discovery.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="contact-info-card h-100">
+        <h5>Sports complex</h5>
+        <p class="text-muted">Fitness, recreation, and wellness spaces for students and the community.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="py-5 bg-light rounded-4 shadow-sm">
+  <div class="row align-items-center g-4">
+    <div class="col-lg-6">
+      <h2 class="section-title">International campus life</h2>
+      <p class="text-muted">From online learning to student associations, SIE supports a rich campus experience for all international students.</p>
+      <ul class="list-unstyled mt-4">
+        <li class="mb-3"><strong>Student Association</strong> — active clubs, cultural celebrations, and academic support.</li>
+        <li class="mb-3"><strong>Online Learning</strong> — flexible learning resources and remote study support.</li>
+        <li><strong>Scholarships</strong> — government and college awards for international students.</li>
+      </ul>
+    </div>
+    <div class="col-lg-6">
+      <div class="row g-3">
+        <div class="col-sm-6">
+          <div class="rounded-4 overflow-hidden shadow-sm">
+            <img src="http://en.sie.jsafc.edu.cn/images/22/03/29/1so4rgysk0/0B2288443294977E01E8CE9438C_CFB4E710_F2FC9.jpg" class="img-fluid" alt="Student activities">
+          </div>
+        </div>
+        <div class="col-sm-6 justify-content-center align-items-center d-flex">
+          <div class="rounded-4 overflow-hidden shadow-sm ">
+            <img src="http://en.sie.jsafc.edu.cn/images/22/03/29/1so4rgysk0/4ADF820B6CD0848C55A3DAD8970_1DADDA3F_C1CDE.jpg" class="img-fluid" alt="Campus walkway">
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="rounded-4 overflow-hidden shadow-xl">
+            <img src="http://en.sie.jsafc.edu.cn/images/22/03/29/1so4rgysk0/0BBA7161E3013A15003AC9693D7_3B18A893_9BE08.jpg" class="img-fluid" alt="Campus landscape">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

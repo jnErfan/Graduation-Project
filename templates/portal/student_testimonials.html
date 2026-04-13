@@ -1,0 +1,85 @@
+{% extends 'portal_base.html' %}
+{% block title %}Student Testimonials{% endblock %}
+{% block content %}
+<div class="d-flex align-items-start justify-content-between flex-wrap gap-3 mb-4">
+  <div>
+    <h1>Student Testimonials</h1>
+    <p class="text-muted">Share your experience, help future students, and manage your own reviews from here.</p>
+  </div>
+  <a href="{{ url_for('portal.student_dashboard') }}" class="btn btn-outline-secondary">Back to Dashboard</a>
+</div>
+<div class="row g-4">
+  <div class="col-xl-5">
+    <div class="card shadow-sm border-0 h-100">
+      <div class="card-body">
+        <h5 class="mb-3">Write a new review</h5>
+        <form method="post">
+          <div class="mb-3">
+            <label class="form-label">Your review</label>
+            <textarea name="content" rows="6" class="form-control" placeholder="Share what you love about campus, classes, or student life..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Publish Review</button>
+        </form>
+      </div>
+    </div>
+    <div class="card shadow-sm border-0 mt-4">
+      <div class="card-body">
+        <h5 class="mb-3">Your reviews</h5>
+        {% if user_testimonials %}
+        <div class="list-group list-group-flush">
+          {% for review in user_testimonials %}
+          <div class="list-group-item rounded-4 mb-3 p-4 shadow-sm">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+              <strong class="text-primary">Posted on {{ review.created_at }}</strong>
+              <a href="{{ url_for('portal.delete_student_testimonial', testimonial_id=review.id) }}" class="btn btn-sm btn-outline-danger">Delete</a>
+            </div>
+            <p class="mb-0 text-muted">{{ review.content }}</p>
+          </div>
+          {% endfor %}
+        </div>
+        {% else %}
+        <div class="alert alert-info mb-0">You haven’t posted any testimonials yet. Share your first review to inspire others.</div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xl-7">
+    <div class="card shadow-sm border-0 h-100">
+      <div class="card-body">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+          <div>
+            <h5 class="mb-1">Community Feedback</h5>
+            <p class="text-muted mb-0">Browse testimonials submitted by students across the portal.</p>
+          </div>
+          <span class="badge bg-primary py-2 px-3">{{ testimonials|length }} reviews</span>
+        </div>
+        <div class="row row-cols-1 g-3">
+          {% for review in testimonials %}
+          <div class="col">
+            <div class="card card-section shadow-sm border-0 rounded-4">
+              <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                  <div>
+                    <h6 class="mb-1">{{ review.student_name }}</h6>
+                    <small class="text-muted">Published {{ review.created_at }}</small>
+                  </div>
+                  {% if review.student_id == user.id %}
+                  <a href="{{ url_for('portal.delete_student_testimonial', testimonial_id=review.id) }}" class="btn btn-sm btn-outline-danger">Delete</a>
+                  {% endif %}
+                </div>
+                <p class="mb-0 text-muted">{{ review.content }}</p>
+              </div>
+            </div>
+          </div>
+          {% else %}
+          <div class="col">
+            <div class="alert alert-secondary text-center">No testimonials have been posted yet. Add the first review to start the conversation.</div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

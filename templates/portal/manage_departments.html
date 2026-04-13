@@ -1,0 +1,61 @@
+{% extends 'portal_base.html' %}
+{% block title %}Manage Departments{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h1 class="mb-1">Manage Departments</h1>
+    <p class="text-muted">Add and maintain academic departments across the portal.</p>
+  </div>
+</div>
+<div class="row g-4">
+  <div class="col-xl-5">
+    <div class="card card-section h-100">
+      <div class="card-body">
+        <h5 class="card-title">Create Department</h5>
+        <form method="post">
+          <div class="row g-3">
+            <div class="col-12"><input class="form-control" name="name" placeholder="Department name" required></div>
+            <div class="col-md-6"><input class="form-control" name="code" placeholder="Code" required></div>
+            <div class="col-md-6"><input class="form-control" name="description" placeholder="Description"></div>
+            <div class="col-12"><button class="btn btn-primary w-100">Add Department</button></div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-7">
+    <div class="card card-section">
+      <div class="card-body">
+        <h5 class="card-title">Departments</h5>
+        <div class="table-responsive mt-3">
+          <table class="table table-hover align-middle">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Code</th>
+                <th>Description</th>
+                <th class="text-end">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for dept in departments %}
+              <tr>
+                <td>{{ dept.name }}</td>
+                <td>{{ dept.code }}</td>
+                <td>{{ dept.description or '—' }}</td>
+                <td class="text-end table-actions">
+                  <a href="{{ url_for('portal.edit_department', department_id=dept.id) }}" class="btn btn-sm btn-outline-secondary">Edit</a>
+                  <a href="{{ url_for('portal.delete_department_item', department_id=dept.id) }}" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+              </tr>
+              {% else %}
+              <tr><td colspan="4" class="text-center">No departments available.</td></tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

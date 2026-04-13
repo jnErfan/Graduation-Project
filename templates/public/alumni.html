@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block title %}Alumni | JSAFC SIE{% endblock %}
+{% block content %}
+<section class="py-5 page-header">
+  <div class="row align-items-center g-4">
+    <div class="col-lg-6">
+      <span class="page-badge">Alumni</span>
+      <h1 class="section-title">A network that lasts a lifetime.</h1>
+      <p class="text-muted">Connect with graduates around the globe through mentorship, events, and career support.</p>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb mb-0">
+          <li class="breadcrumb-item"><a href="{{ url_for('public.home') }}">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Alumni</li>
+        </ol>
+      </nav>
+    </div>
+    <div class="col-lg-6">
+      <div class="page-header-image shadow-xl">
+        <img src="http://en.sie.jsafc.edu.cn/__local/C/50/B4/82F022143978D2B3183F7A60A72_C470D4CA_DEB6D.png" alt="Alumni networking event">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-5 page-card">
+  <span class="page-badge">Alumni highlights</span>
+  <h2 class="section-title">Celebrate alumni achievement and lifelong connection.</h2>
+  <div class="row g-4 mt-4">
+    <div class="col-md-6">
+      <div class="news-card h-100 rounded-4 overflow-hidden shadow-sm">
+        <img src="http://en.sie.jsafc.edu.cn/__local/0/51/14/D84BCF820234835955462B9BAED_E7E97EC6_16E22.jpg" alt="Success stories">
+        <div class="p-4">
+          <h5>Success Stories</h5>
+          <p class="text-muted">Read profiles of alumni making an impact in business, education, and innovation.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="news-card h-100 rounded-4 overflow-hidden shadow-sm">
+        <img src="http://en.sie.jsafc.edu.cn/__local/A/67/D8/61062B8C9EADBA01240709327C1_EA0792E0_F14B.jpg" alt="Giving back">
+        <div class="p-4">
+          <h5>Giving Back</h5>
+          <p class="text-muted">Support scholarships and community initiatives through alumni engagement.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-5">
+  <div class="row align-items-center g-4">
+    <div class="col-md-6">
+      <span class="page-badge">Engage</span>
+      <h2 class="section-title">Stay connected through mentorship and events.</h2>
+      <p class="text-muted">Join networking sessions, share career insights, and support future students through alumni programs.</p>
+    </div>
+    <div class="col-md-6">
+      <div class="feature-card h-100">
+        <div class="feature-icon"><i class="bi bi-telephone-fill"></i></div>
+        <h5 class="mt-3">Alumni relations</h5>
+        <p>Contact our alumni office for event information, giving, and mentorship opportunities.</p>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

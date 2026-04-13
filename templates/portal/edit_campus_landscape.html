@@ -1,0 +1,21 @@
+{% extends 'portal_base.html' %}
+{% block title %}Edit Campus Landscape{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h1 class="mb-1">Edit Campus Landscape</h1>
+    <p class="text-muted">Update the campus landscape entry displayed on the public page.</p>
+  </div>
+</div>
+<div class="card card-section">
+  <div class="card-body">
+    <form method="post">
+      <input type="hidden" name="landscape_id" value="{{ item.id }}">
+      <div class="row g-3">
+        <div class="col-md-6"><input class="form-control" name="image_url" placeholder="Image URL" value="{{ item.image_url }}"></div>
+        <div class="col-md-12"><button class="btn btn-primary">Save Changes</button></div>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

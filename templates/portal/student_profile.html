@@ -1,0 +1,110 @@
+{% extends 'portal_base.html' %}
+{% block title %}Student Profile{% endblock %}
+{% block content %}
+<div class="d-flex align-items-start justify-content-between flex-wrap gap-3">
+  <div>
+    <h1>My Profile</h1>
+    <p class="text-muted">Profile information and student tools for attendance, results, and course registration.</p>
+  </div>
+  <div>
+    <a href="{{ url_for('portal.student_attendance') }}" class="btn btn-outline-primary me-2">Attendance</a>
+    <a href="{{ url_for('portal.student_results') }}" class="btn btn-outline-secondary me-2">Results</a>
+    <a href="{{ url_for('portal.course_registration') }}" class="btn btn-primary">Register Courses</a>
+  </div>
+</div>
+<div class="row g-4 mt-4">
+  <div class="col-lg-5">
+    <div class="card shadow-sm border-0 h-100">
+      <div class="card-body">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+          <div>
+            <h2 class="mb-1">{{ user.name }}</h2>
+            <p class="text-muted mb-0">Student profile</p>
+          </div>
+          <span class="badge bg-primary py-2 px-3">{{ user.role_name|capitalize }}</span>
+        </div>
+        <dl class="row mb-0">
+          <dt class="col-5 text-muted">Email</dt>
+          <dd class="col-7">{{ user.email }}</dd>
+          <dt class="col-5 text-muted">Department</dt>
+          <dd class="col-7">{{ user.department_name or 'Not assigned' }}</dd>
+          <dt class="col-5 text-muted">Joined</dt>
+          <dd class="col-7">{{ user.created_at.strftime('%Y-%m-%d') if user.created_at else 'N/A' }}</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-7">
+    <div class="row g-4">
+      <div class="col-sm-4">
+        <div class="card shadow-sm border-0 h-100 text-center py-4">
+          <div class="card-body">
+            <h6 class="text-muted">Courses</h6>
+            <p class="display-6 mb-1">{{ enrollment_count }}</p>
+            <small class="text-muted">Registered</small>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="card shadow-sm border-0 h-100 text-center py-4">
+          <div class="card-body">
+            <h6 class="text-muted">Attendance</h6>
+            <p class="display-6 mb-1">{{ attendance_count }}</p>
+            <small class="text-muted">Records</small>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="card shadow-sm border-0 h-100 text-center py-4">
+          <div class="card-body">
+            <h6 class="text-muted">Results</h6>
+            <p class="display-6 mb-1">{{ result_count }}</p>
+            <small class="text-muted">Grades</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<section class="row g-4 mt-4">
+  <div class="col-lg-7">
+    <div class="card shadow-sm border-0 h-100">
+      <div class="card-body">
+        <h4 class="mb-3">Profile details</h4>
+        <p class="text-muted">Keep your personal and academic contact details up to date. Use the quick actions above to navigate directly to attendance and course registration.</p>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span>Student email</span>
+            <strong>{{ user.email }}</strong>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span>Department</span>
+            <strong>{{ user.department_name or 'Not assigned' }}</strong>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span>Student role</span>
+            <strong>{{ user.role_name|capitalize }}</strong>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span>Courses registered</span>
+            <strong>{{ enrollment_count }}</strong>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-5">
+    <div class="card shadow-sm border-0 h-100 notice-panel">
+      <div class="card-body">
+        <h4 class="mb-3">Attendance access</h4>
+        <p class="text-muted">Review attendance history or submit attendance actions from your portal.</p>
+        <a href="{{ url_for('portal.student_attendance') }}" class="btn btn-primary w-100">Open Attendance</a>
+        <div class="mt-4 p-3 bg-light rounded-4">
+          <h6>Need help?</h6>
+          <p class="mb-0 text-muted">If your attendance record looks incorrect, contact administration to update the status.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

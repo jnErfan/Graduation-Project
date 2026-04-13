@@ -1,0 +1,78 @@
+from flask import Blueprint, render_template
+from models import get_news, get_events, get_programs, get_admissions, get_notices, get_testimonials, get_campus_landscapes, get_teachers_authorities
+
+public_bp = Blueprint('public', __name__)
+
+
+@public_bp.route('/')
+def home():
+    return render_template('public/home.html')
+
+
+@public_bp.route('/about')
+def about():
+    return render_template('public/about.html')
+
+
+@public_bp.route('/admissions')
+def admissions():
+    admissions_data = get_admissions()
+    programs = get_programs()
+    return render_template('public/admissions.html', admissions_data=admissions_data, programs=programs)
+
+
+@public_bp.route('/academics')
+def academics():
+    programs = get_programs()
+    notices = get_notices()
+    return render_template('public/academics.html', programs=programs, notices=notices)
+
+
+@public_bp.route('/faculty')
+def faculty():
+    return render_template('public/faculty.html')
+
+
+@public_bp.route('/campus-landscape')
+def campus_landscape():
+    landscapes = get_campus_landscapes()
+    return render_template('public/campus_landscape.html', landscapes=landscapes)
+
+
+@public_bp.route('/teachers-authority')
+def teachers_authority():
+    authorities = get_teachers_authorities()
+    return render_template('public/teachers_authority.html', authorities=authorities)
+
+
+@public_bp.route('/student-life')
+def student_life():
+    testimonials = get_testimonials()
+    return render_template('public/student_life.html', testimonials=testimonials)
+
+
+@public_bp.route('/campus-facilities')
+def campus_facilities():
+    return render_template('public/campus_facilities.html')
+
+
+@public_bp.route('/news')
+def news():
+    news_items = get_news()
+    return render_template('public/news.html', news_items=news_items)
+
+
+@public_bp.route('/events')
+def events():
+    events_list = get_events()
+    return render_template('public/events.html', events_list=events_list)
+
+
+@public_bp.route('/alumni')
+def alumni():
+    return render_template('public/alumni.html')
+
+
+@public_bp.route('/contact')
+def contact():
+    return render_template('public/contact.html')

@@ -1,0 +1,25 @@
+{% extends 'portal_base.html' %}
+{% block title %}Edit Teacher / Authority{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h1 class="mb-1">Edit Teacher / Authority</h1>
+    <p class="text-muted">Update the profile displayed on the public page.</p>
+  </div>
+</div>
+<div class="card card-section">
+  <div class="card-body">
+    <form method="post">
+      <input type="hidden" name="authority_id" value="{{ item.id }}">
+      <div class="row g-3">
+        <div class="col-md-6"><input class="form-control" name="name" placeholder="Name" value="{{ item.name }}" required></div>
+        <div class="col-md-6"><input class="form-control" name="role" placeholder="Role" value="{{ item.role }}" required></div>
+        <div class="col-md-12"><textarea class="form-control" name="bio" rows="4" placeholder="Biography" required>{{ item.bio }}</textarea></div>
+        <div class="col-md-6"><input class="form-control" name="image_url" placeholder="Image URL" value="{{ item.image_url }}"></div>
+        <div class="col-md-6"><input class="form-control" name="profile_url" placeholder="Profile URL" value="{{ item.profile_url }}"></div>
+        <div class="col-md-12"><button class="btn btn-primary">Save Changes</button></div>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

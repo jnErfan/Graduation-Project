@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block title %}Events | JSAFC SIE{% endblock %}
+{% block content %}
+<section class="py-5 page-header">
+  <div class="row align-items-center">
+    <div class="col-md-7">
+      <span class="page-badge">Campus events</span>
+      <h1 class="section-title">Experience campus life in every season.</h1>
+      <p class="text-muted">From open houses and lectures to festivals and reunions, our calendar is filled with opportunities to connect.</p>
+    </div>
+    <div class="col-md-5 text-center">
+      <img src="https://images.pexels.com/photos/1181415/pexels-photo-1181415.jpeg?auto=compress&cs=tinysrgb&w=1200" class="img-fluid rounded-4 shadow-xl mb-4" alt="Campus event gathering">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb justify-content-center justify-content-md-end mb-0">
+          <li class="breadcrumb-item"><a href="{{ url_for('public.home') }}">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Events</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+</section>
+
+<section class="py-5 page-card">
+  <div class="row g-4">
+    <div class="col-lg-8">
+      <div class="event-list">
+        {% for event in events_list %}
+        <div class="event-item">
+          <div class="event-date">
+            <span class="event-day">{{ event.event_date.day if event.event_date }}</span>
+            <span class="event-month">{{ event.event_date.strftime('%b') if event.event_date }}</span>
+          </div>
+          <div class="event-item-body">
+            <h5>{{ event.title }}</h5>
+            <p class="text-muted mb-2">{{ event.description }}</p>
+            <p class="mb-0 text-muted">
+              {% if event.start_time or event.end_time %}
+              <i class="bi bi-clock me-2"></i>{{ event.start_time or 'TBD' }}{% if event.end_time %} - {{ event.end_time }}{% endif %}
+              {% elif event.location %}
+              <i class="bi bi-geo-alt me-2"></i>{{ event.location }}
+              {% endif %}
+            </p>
+          </div>
+        </div>
+        {% else %}
+        <div class="alert alert-secondary">No events have been scheduled yet.</div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="contact-info-card mb-4">
+        <h5>Event categories</h5>
+        <ul class="list-unstyled mt-3 mb-0">
+          <li class="py-2 border-bottom">Academic <span class="float-end text-muted">{{ events_list|length }}</span></li>
+        </ul>
+      </div>
+      <div class="contact-info-card">
+        <h5>Explore more</h5>
+        <p class="text-muted">Check back regularly for the latest campus events and announcements.</p>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

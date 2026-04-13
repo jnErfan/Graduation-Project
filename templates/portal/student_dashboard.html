@@ -1,0 +1,183 @@
+{% extends 'portal_base.html' %}
+{% block title %}Student Dashboard{% endblock %}
+{% block content %}
+<section class="dashboard-hero rounded-4 p-4 p-md-5 mb-4 text-white position-relative overflow-hidden">
+  <div class="row align-items-center gy-4">
+    <div class="col-lg-7">
+      <span class="section-label text-white">Student Portal</span>
+      <h1 class="display-5 fw-bold">Hello, {{ user.name }}</h1>
+      <p class="lead text-white-75">Your dashboard keeps track of course registration, attendance records, grades, and campus notices in one place.</p>
+      <div class="d-flex flex-wrap gap-2 mt-4">
+        <a href="{{ url_for('portal.course_registration') }}" class="btn btn-light btn-lg">Register Courses</a>
+        <a href="{{ url_for('portal.student_attendance') }}" class="btn btn-outline-light btn-lg">View Attendance</a>
+        <a href="{{ url_for('portal.student_testimonials') }}" class="btn btn-outline-light btn-lg">Student Testimonials</a>
+      </div>
+    </div>
+    <div class="col-lg-5">
+      <div class="dashboard-hero-card rounded-4 p-4 bg-white bg-opacity-10 border border-white border-opacity-10">
+        <h5 class="text-white mb-3">Quick actions</h5>
+        <ul class="list-unstyled text-white-75 mb-0">
+          <li class="py-2">• Check your latest course registrations</li>
+          <li class="py-2">• Review attendance summaries</li>
+          <li class="py-2">• See your latest notices</li>
+          <li class="py-2">• Access exam results immediately</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="row g-4">
+  <div class="col-md-6 col-xl-3">
+    <div class="card shadow-sm border-0 h-100 dashboard-summary-card">
+      <div class="card-body">
+        <small class="text-uppercase text-muted">Registrations</small>
+        <h2 class="mt-3">{{ enrollments|length }}</h2>
+        <p class="text-muted mb-0">Active courses</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 col-xl-3">
+    <div class="card shadow-sm border-0 h-100 dashboard-summary-card">
+      <div class="card-body">
+        <small class="text-uppercase text-muted">Attendance</small>
+        <h2 class="mt-3">{{ attendance|length }}</h2>
+        <p class="text-muted mb-0">Total records</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 col-xl-3">
+    <div class="card shadow-sm border-0 h-100 dashboard-summary-card">
+      <div class="card-body">
+        <small class="text-uppercase text-muted">Results</small>
+        <h2 class="mt-3">{{ results|length }}</h2>
+        <p class="text-muted mb-0">Grades available</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 col-xl-3">
+    <div class="card shadow-sm border-0 h-100 dashboard-summary-card">
+      <div class="card-body">
+        <small class="text-uppercase text-muted">Notices</small>
+        <h2 class="mt-3">{{ notices|length }}</h2>
+        <p class="text-muted mb-0">Latest campus announcements</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row g-4 ">
+ 
+ <div class="row g-4 mt-4">
+  <div class="col-xl-6">
+    <div class="card shadow-sm border-0 h-100">
+      <div class="card-body">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+          <div>
+            <h5 class="mb-1">Attendance Summary</h5>
+            <p class="text-muted mb-0">Recent status breakdown and key insights.</p>
+          </div>
+          <a href="{{ url_for('portal.student_attendance') }}" class="btn btn-sm btn-outline-primary">View all</a>
+        </div>
+        <div class="row text-center">
+          <div class="col-4">
+            <div class="summary-bubble bg-success text-white mb-2">{{ attendance_summary.present }}</div>
+            <p class="mb-0 text-muted">Present</p>
+          </div>
+          <div class="col-4">
+            <div class="summary-bubble bg-danger text-white mb-2">{{ attendance_summary.absent }}</div>
+            <p class="mb-0 text-muted">Absent</p>
+          </div>
+          <div class="col-4">
+            <div class="summary-bubble bg-info text-white mb-2">{{ attendance_summary.excused }}</div>
+            <p class="mb-0 text-muted">Excused</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-6">
+    <div class="card shadow-sm border-0 h-100">
+      <div class="card-body">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+          <div>
+            <h5 class="mb-1">Recent Results</h5>
+            <p class="text-muted mb-0">Quick glance at your latest course grades.</p>
+          </div>
+          <a href="{{ url_for('portal.student_results') }}" class="btn btn-sm btn-outline-primary">View all</a>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-borderless align-middle mb-0">
+            <thead class="table-light"><tr><th>Course</th><th>Grade</th><th>Remarks</th></tr></thead>
+            <tbody>
+              {% for result in results[:5] %}
+              <tr>
+                <td>{{ result.course_name }}</td>
+                <td><strong>{{ result.grade }}</strong></td>
+                <td class="text-muted">{{ result.remarks or '—' }}</td>
+              </tr>
+              {% else %}
+              <tr><td colspan="3" class="text-muted">No result entries yet.</td></tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+ <div class="col-xl-4">
+    <div class="card shadow-sm border-0 h-100">
+      <div class="card-body">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+          <div>
+            <h4 class="mb-1">Current Enrollments</h4>
+            <p class="text-muted mb-0">Your active courses and registration statuses.</p>
+          </div>
+          <a href="{{ url_for('portal.course_registration') }}" class="btn btn-outline-primary">Register new course</a>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-borderless align-middle mb-0">
+            <thead class="table-light"><tr><th>Course</th><th>Code</th><th>Status</th><th>Enrolled</th></tr></thead>
+            <tbody>
+              {% for enrollment in enrollments %}
+              <tr>
+                <td>{{ enrollment.course_name }}</td>
+                <td>{{ enrollment.course_code }}</td>
+                <td class="text-success">{{ enrollment.status }}</td>
+                <td>{{ enrollment.enrollment_date }}</td>
+              </tr>
+              {% else %}
+              <tr><td colspan="4" class="text-muted">No course registrations found yet.</td></tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-8">
+    <div class="card shadow-sm border-0 h-100 notice-panel">
+      <div class="card-body">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+          <div>
+            <h4 class="mb-1">Campus Notices</h4>
+            <p class="text-muted mb-0">Uploaded by admin for all students.</p>
+          </div>
+          <span class="badge bg-primary py-2 px-3">{{ notices|length }} new</span>
+        </div>
+        <div class="list-group list-group-flush">
+          {% for notice in notices[:5] %}
+          <div class="list-group-item rounded-4 mb-3 p-3 shadow-sm">
+            <h6 class="mb-2">{{ notice.title }}</h6>
+            <p class="mb-2 text-muted small">{{ notice.created_at }}</p>
+            <p class="mb-0 text-muted">{{ notice.content }}</p>
+          </div>
+          {% else %}
+          <div class="text-center text-muted py-5">No notices available yet.</div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

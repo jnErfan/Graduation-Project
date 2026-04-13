@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% block title %}Faculty & Staff | JSAFC SIE{% endblock %}
+{% block content %}
+<section class="py-5 page-header">
+  <div class="row align-items-center">
+    <div class="col-md-7">
+      <span class="page-badge">Faculty</span>
+      <h1 class="section-title">International educators nurturing global talent.</h1>
+      <p class="text-muted">The School of International Education brings together experienced instructors and international partners to support students on academic and professional journeys.</p>
+    </div>
+    <div class="col-md-5 text-md-end">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb justify-content-md-end mb-0">
+          <li class="breadcrumb-item"><a href="{{ url_for('public.home') }}">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Faculty</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+</section>
+
+<section class="py-5 page-card">
+  <div class="row align-items-center g-4">
+    <div class="col-lg-6">
+      <h2 class="section-title">Experienced faculty for practical education.</h2>
+      <p class="text-muted">Faculty at JSAFC SIE combine vocational training, international exchange programs, and practical classroom instruction to prepare students for global careers.</p>
+      <a href="{{ url_for('public.academics') }}" class="btn btn-primary btn-lg mt-3">Explore our programs</a>
+    </div>
+    <div class="col-lg-6 text-center">
+      <div class="card-hero rounded-4 overflow-hidden shadow-xl">
+        <img src="http://en.sie.jsafc.edu.cn/__local/2/06/49/115A9A66E0C911A73EE14AA6024_38026BFC_211A5.jpg" class="img-fluid" alt="JSAFC faculty teaching">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-5">
+  <div class="row g-4">
+    <div class="col-md-4">
+      <div class="feature-card h-100">
+        <div class="feature-icon"><i class="bi bi-mortarboard"></i></div>
+        <h5 class="mt-3">Global expertise</h5>
+        <p class="text-muted">International instructors share global insights and career-focused education.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="feature-card h-100">
+        <div class="feature-icon"><i class="bi bi-briefcase"></i></div>
+        <h5 class="mt-3">Industry-driven training</h5>
+        <p class="text-muted">Faculty collaborations with industry enhance practical skills and internship readiness.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="feature-card h-100">
+        <div class="feature-icon"><i class="bi bi-chat-right-quote"></i></div>
+        <h5 class="mt-3">Student mentorship</h5>
+        <p class="text-muted">Personalized guidance supports student success inside and outside the classroom.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-5 bg-light rounded-4 shadow-sm">
+  <div class="row align-items-center g-4">
+    <div class="col-lg-6">
+      <h2 class="section-title">International collaboration</h2>
+      <p class="text-muted">Our faculty work with partner institutions worldwide to deliver programs recognized for vocational excellence and global mobility.</p>
+    </div>
+    <div class="col-lg-6">
+      <div class="row g-3">
+        <div class="col-sm-6">
+          <div class="rounded-4 overflow-hidden shadow-sm">
+            <img src="http://en.sie.jsafc.edu.cn/__local/3/EA/A7/4E1D4D998CCEDD9D4E8306B0644_5D76B20A_18B18.jpg" class="img-fluid" alt="Faculty seminar">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="rounded-4 overflow-hidden shadow-sm">
+            <img src="http://en.sie.jsafc.edu.cn/__local/D/D6/9A/93C4D4EF2091D0C25A92E6C5EA7_DB1C02B4_1BA5F.jpg" class="img-fluid" alt="Academic collaboration">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

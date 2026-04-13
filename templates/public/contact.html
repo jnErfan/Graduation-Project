@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block title %}Contact | JSAFC SIE{% endblock %}
+{% block content %}
+<section class="py-5 page-header">
+  <div class="row align-items-center">
+    <div class="col-md-7">
+      <span class="page-badge">Contact</span>
+      <h1 class="section-title">Contact the School of International Education</h1>
+      <p class="text-muted">For admissions, international exchange, campus visits, or student support, our office is ready to assist you.</p>
+    </div>
+    <div class="col-md-5 text-center">
+      <img src="https://www.jsafc.edu.cn/images/ben1.jpg" class="img-fluid rounded-4 shadow-xl mb-4" alt="JSAFC campus">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb justify-content-center justify-content-md-end mb-0">
+          <li class="breadcrumb-item"><a href="{{ url_for('public.home') }}">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Contact</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+</section>
+
+<section class="py-5 page-card">
+  <div class="row g-4">
+    <div class="col-lg-7">
+      <div class="contact-map">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3290.0613909256648!2d119.16827311511169!3d31.948101120741897!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x35b70214f0e93c15%3A0x8edb86b06c00a1da!2sJiangsu%20Vocational%20College%20of%20Agriculture%20and%20Forestry!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus" loading="lazy"></iframe>
+      </div>
+    </div>
+    <div class="col-lg-5">
+      <div class="contact-info-card mb-4">
+        <h5>Location</h5>
+        <p>19 East Wenchang Road, Jurong City, Jiangsu Province, China</p>
+      </div>
+      <div class="contact-info-card mb-4">
+        <h5>Email</h5>
+        <p>gjjl@jsafc.edu.cn</p>
+      </div>
+      <div class="contact-info-card mb-4">
+        <h5>Phone</h5>
+        <p>+86 (511) 8729 1551</p>
+      </div>
+      <div class="contact-info-card">
+        <h5>Office</h5>
+        <p>School of International Education, Jiangsu Vocational College of Agriculture and Forestry</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-5">
+  <div class="contact-form-card">
+    <h4>Get in Touch</h4>
+    <p class="text-muted">Send us a message and we’ll get back to you as soon as possible.</p>
+    <form>
+      <div class="row g-3">
+        <div class="col-md-6"><label class="form-label">Your Name</label><input class="form-control" type="text"></div>
+        <div class="col-md-6"><label class="form-label">Your Email</label><input class="form-control" type="email"></div>
+        <div class="col-md-12"><label class="form-label">Subject</label><input class="form-control" type="text"></div>
+        <div class="col-md-12"><label class="form-label">Message</label><textarea class="form-control" rows="5"></textarea></div>
+      </div>
+      <button class="btn btn-primary btn-lg mt-4">Submit</button>
+    </form>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% block title %}Student Life | JSAFC SIE{% endblock %}
+{% block content %}
+<section class="py-5 page-header">
+  <div class="row align-items-center g-4">
+    <div class="col-lg-6">
+      <span class="page-badge">Student Life</span>
+      <h1 class="section-title">A campus community where every student belongs.</h1>
+      <p class="text-muted">Discover vibrant clubs, wellness programs, residential life, and events that make college memorable.</p>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb mb-0">
+          <li class="breadcrumb-item"><a href="{{ url_for('public.home') }}">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Student Life</li>
+        </ol>
+      </nav>
+    </div>
+    <div class="col-lg-6">
+      <div class="page-header-image shadow-xl">
+        <img src="http://en.sie.jsafc.edu.cn/images/22/03/29/1so4rgysk0/DBBDAB48D4A2C2C195B602EFB80_24404FC3_92ADC.jpg" alt="Student life campus community">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-5">
+  <div class="row align-items-center g-4">
+    <div class="col-lg-6">
+      <div class="card-hero">
+        <img src="http://en.sie.jsafc.edu.cn/images/22/03/29/1so4rgysk0/A58CC196A930D750302438CBC65_394E3AAC_CA5D7.jpg" class="img-fluid" alt="Student life">
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <h2 class="section-title">A vibrant environment built for learning and connection.</h2>
+      <p class="text-muted">From student clubs to wellness programs, our campus is designed for participation and belonging.</p>
+      <div class="stats-panel mt-4">
+        <div class="stat-box">
+          <h3>2500+</h3>
+          <p>Active Students</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-5">
+  <div class="row g-4">
+    <div class="col-md-4">
+      <div class="news-card h-100 rounded-4 overflow-hidden shadow-sm">
+        <img src="http://en.sie.jsafc.edu.cn/images/22/03/29/1so4rgysk0/0E0970B3E544756E6284D956195_8685353C_9FCFD.jpg" alt="Clubs and activities">
+        <div class="p-4">
+          <h5>Clubs & activities</h5>
+          <p class="text-muted">Hundreds of organizations for leadership, arts, sports, and culture.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="news-card h-100 rounded-4 overflow-hidden shadow-sm">
+        <img src="https://zsw.jsafc.edu.cn/images/19/11/29/1osprpm4ox/6.JPG" alt="Campus housing">
+        <div class="p-4">
+          <h5>Housing</h5>
+          <p class="text-muted">Comfortable residential communities with study lounges and social spaces.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="news-card h-100 rounded-4 overflow-hidden shadow-sm">
+        <img src="http://en.sie.jsafc.edu.cn/images/22/03/29/1so4rgysk0/0B2288443294977E01E8CE9438C_CFB4E710_F2FC9.jpg" alt="Support services">
+        <div class="p-4">
+          <h5>Support services</h5>
+          <p class="text-muted">Academic advising, counseling, and career coaching to help you thrive.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-5">
+  <div class="row g-4">
+    <div class="col-md-6">
+      <div class="feature-card h-100">
+        <div class="feature-icon"><i class="bi bi-house-door"></i></div>
+        <h5 class="mt-3">Home away from home</h5>
+        <p>Live, study, and relax in connected residential communities with supportive staff.</p>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="feature-card h-100">
+        <div class="feature-icon"><i class="bi bi-music-note-list"></i></div>
+        <h5 class="mt-3">Student events</h5>
+        <p>Enjoy cultural nights, wellness workshops, performances, and leadership programs year-round.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-5 bg-light rounded-4 shadow-sm">
+  <div class="row align-items-center mb-4">
+    <div class="col-lg-8">
+      <span class="page-badge">Student Reviews</span>
+      <h2 class="section-title">What students are saying about campus life</h2>
+      <p class="text-muted">Real testimonials from current students about clubs, housing, support services, and the community.</p>
+    </div>
+    <div class="col-lg-4 text-lg-end">
+      <span class="badge bg-primary py-2 px-3">{{ testimonials|length }} reviews</span>
+    </div>
+  </div>
+  <div class="row g-4">
+    {% for review in testimonials[:4] %}
+    <div class="col-md-6">
+      <div class="review-card p-4 rounded-4 shadow-sm h-100 bg-white">
+        <div class="d-flex align-items-center justify-content-between mb-3">
+          <div>
+            <h5 class="mb-1">{{ review.student_name }}</h5>
+            <small class="text-muted">{{ review.created_at }}</small>
+          </div>
+          <span class="badge bg-info text-dark">Student</span>
+        </div>
+        <p class="text-muted mb-0">{{ review.content }}</p>
+      </div>
+    </div>
+    {% else %}
+    <div class="col-12">
+      <div class="alert alert-secondary text-center rounded-4">No student testimonials are available yet. Login to the portal to add the first review.</div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'portal_base.html' %}
+{% block title %}Manage News{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h1 class="mb-1">Manage News</h1>
+    <p class="text-muted">Add and manage news items for the public site.</p>
+  </div>
+</div>
+<div class="card card-section mb-4">
+  <div class="card-body">
+    <form method="post">
+      <div class="row g-3">
+        <div class="col-md-6"><input class="form-control" name="title" placeholder="Title" required></div>
+        <div class="col-md-6"><input class="form-control" name="summary" placeholder="Summary" required></div>
+        <div class="col-md-12"><textarea class="form-control" name="content" rows="3" placeholder="Content"></textarea></div>
+        <div class="col-md-6"><input class="form-control" name="image_url" placeholder="Image URL"></div>
+        <div class="col-md-6"><input class="form-control" name="link_url" placeholder="Link URL"></div>
+        <div class="col-md-12"><button class="btn btn-primary">Add News Item</button></div>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="table-responsive">
+  <table class="table table-striped align-middle">
+    <thead><tr><th>Title</th><th>Summary</th><th>Published</th><th>Actions</th></tr></thead>
+    <tbody>
+      {% for item in news_items %}
+      <tr>
+        <td>{{ item.title }}</td>
+        <td>{{ item.summary }}</td>
+        <td>{{ item.published_at }}</td>
+        <td>
+          <a href="{{ url_for('portal.edit_news', news_id=item.id) }}" class="btn btn-sm btn-secondary">Edit</a>
+          <a href="{{ url_for('portal.delete_news_item', news_id=item.id) }}" class="btn btn-sm btn-danger">Delete</a>
+        </td>
+      </tr>
+      {% else %}
+      <tr><td colspan="4">No news items available.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

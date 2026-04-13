@@ -1,0 +1,40 @@
+{% extends 'portal_base.html' %}
+{% block title %}Manage Notices{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h1 class="mb-1">Manage Notices</h1>
+    <p class="text-muted">Create and update notices that appear on student dashboards.</p>
+  </div>
+</div>
+<div class="card card-section mb-4">
+  <div class="card-body">
+    <form method="post">
+      <div class="row g-3">
+        <div class="col-md-6"><input class="form-control" name="title" placeholder="Notice title" required></div>
+        <div class="col-md-6"><input class="form-control" name="content" placeholder="Notice content" required></div>
+        <div class="col-md-12"><button class="btn btn-primary">Publish Notice</button></div>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="table-responsive">
+  <table class="table table-striped align-middle">
+    <thead><tr><th>Title</th><th>Created</th><th>Actions</th></tr></thead>
+    <tbody>
+      {% for notice in notices %}
+      <tr>
+        <td>{{ notice.title }}</td>
+        <td>{{ notice.created_at }}</td>
+        <td>
+          <a href="{{ url_for('portal.edit_notice', notice_id=notice.id) }}" class="btn btn-sm btn-secondary">Edit</a>
+          <a href="{{ url_for('portal.delete_notice_item', notice_id=notice.id) }}" class="btn btn-sm btn-danger">Delete</a>
+        </td>
+      </tr>
+      {% else %}
+      <tr><td colspan="3">No notices have been created yet.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

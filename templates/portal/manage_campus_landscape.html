@@ -1,0 +1,39 @@
+{% extends 'portal_base.html' %}
+{% block title %}Manage Campus Landscape{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h1 class="mb-1">Manage Campus Landscape</h1>
+    <p class="text-muted">Add, update, and remove campus landscape sections for public display.</p>
+  </div>
+</div>
+<div class="card card-section mb-4">
+  <div class="card-body">
+    <form method="post">
+      <div class="row g-3">
+        <div class="col-md-6"><input class="form-control" name="image_url" placeholder="Image URL"></div>
+        <div class="col-md-12"><button class="btn btn-primary">Add Campus Landscape Item</button></div>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="table-responsive">
+  <table class="table table-striped align-middle">
+    <thead><tr><th>Image URL</th><th>Created</th><th class="text-end">Actions</th></tr></thead>
+    <tbody>
+      {% for item in landscapes %}
+      <tr>
+        <td><a href="{{ item.image_url }}" target="_blank" class="text-truncate d-inline-block" style="max-width: 320px;">{{ item.image_url }}</a></td>
+        <td>{{ item.created_at }}</td>
+        <td class="text-end">
+          <a href="{{ url_for('portal.edit_campus_landscape', landscape_id=item.id) }}" class="btn btn-sm btn-secondary">Edit</a>
+          <a href="{{ url_for('portal.delete_campus_landscape_item', landscape_id=item.id) }}" class="btn btn-sm btn-danger">Delete</a>
+        </td>
+      </tr>
+      {% else %}
+      <tr><td colspan="3">No campus landscape entries found.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

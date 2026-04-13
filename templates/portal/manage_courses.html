@@ -1,0 +1,73 @@
+{% extends 'portal_base.html' %}
+{% block title %}Manage Courses{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h1 class="mb-1">Manage Courses</h1>
+    <p class="text-muted">Add, edit, and remove academic course offerings.</p>
+  </div>
+</div>
+<div class="row g-4">
+  <div class="col-xl-5">
+    <div class="card card-section h-100">
+      <div class="card-body">
+        <h5 class="card-title">Add New Course</h5>
+        <form method="post">
+          <div class="row g-3">
+            <div class="col-12"><input class="form-control" name="name" placeholder="Course name" required></div>
+            <div class="col-md-6"><input class="form-control" name="code" placeholder="Course code" required></div>
+            <div class="col-md-6"><input class="form-control" name="credits" type="number" min="1" value="3" required></div>
+            <div class="col-12">
+              <select class="form-select" name="department_id" required>
+                <option selected disabled>Choose department</option>
+                {% for dept in departments %}
+                <option value="{{ dept.id }}">{{ dept.name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="col-12">
+              <button class="btn btn-primary w-100">Add Course</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-7">
+    <div class="card card-section">
+      <div class="card-body">
+        <h5 class="card-title">Course Catalog</h5>
+        <div class="table-responsive mt-3">
+          <table class="table table-hover align-middle">
+            <thead>
+              <tr>
+                <th>Course</th>
+                <th>Code</th>
+                <th>Department</th>
+                <th>Credits</th>
+                <th class="text-end">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for course in courses %}
+              <tr>
+                <td>{{ course.name }}</td>
+                <td>{{ course.code }}</td>
+                <td>{{ course.department_name or '—' }}</td>
+                <td>{{ course.credits }}</td>
+                <td class="text-end table-actions">
+                  <a href="{{ url_for('portal.edit_course', course_id=course.id) }}" class="btn btn-sm btn-outline-secondary">Edit</a>
+                  <a href="{{ url_for('portal.delete_course_item', course_id=course.id) }}" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+              </tr>
+              {% else %}
+              <tr><td colspan="5" class="text-center">No courses found.</td></tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
