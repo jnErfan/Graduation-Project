@@ -11,6 +11,7 @@ class MySQL:
     def connect(self):
         return pymysql.connect(
             host=self.app.config["MYSQL_HOST"],
+            port=self.app.config.get("MYSQL_PORT", 3306),
             user=self.app.config["MYSQL_USER"],
             password=self.app.config["MYSQL_PASSWORD"],
             db=self.app.config["MYSQL_DB"],
