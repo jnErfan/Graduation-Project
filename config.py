@@ -29,3 +29,14 @@ else:
     MYSQL_PORT = int(os.environ.get("MYSQL_PORT", 3306))
 
 MYSQL_CURSORCLASS = "DictCursor"
+SECRET_KEY = os.environ.get("SECRET_KEY", "dev-secret-key")
+
+
+class Config:
+    SECRET_KEY = SECRET_KEY
+    MYSQL_HOST = MYSQL_HOST
+    MYSQL_USER = MYSQL_USER
+    MYSQL_PASSWORD = MYSQL_PASSWORD
+    MYSQL_DB = MYSQL_DB
+    MYSQL_PORT = MYSQL_PORT
+    MYSQL_CURSORCLASS = MYSQL_CURSORCLASS
