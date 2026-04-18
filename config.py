@@ -7,7 +7,7 @@ def parse_database_url(url):
     return {
         "host": parsed.hostname or "127.0.0.1",
         "user": parsed.username or "root",
-        "password": parsed.password or "",
+        "password": parsed.password or "asdf1234",
         "db": parsed.path.lstrip("/") or "university_portal",
         "port": parsed.port or 3306,
     }
