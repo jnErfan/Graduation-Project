@@ -7,7 +7,7 @@ def parse_database_url(url):
     return {
         "host": parsed.hostname or "127.0.0.1",
         "user": parsed.username or "root",
-        "password": parsed.password or "",
+        "password": parsed.password or "asdf1234",
         "db": parsed.path.lstrip("/") or "university_portal",
         "port": parsed.port or 3306,
     }
@@ -24,7 +24,7 @@ if db_url:
 else:
     MYSQL_HOST = os.environ.get("MYSQL_HOST", "127.0.0.1")
     MYSQL_USER = os.environ.get("MYSQL_USER", "root")
-    MYSQL_PASSWORD = os.environ.get("MYSQL_PASSWORD", "")
+    MYSQL_PASSWORD = os.environ.get("MYSQL_PASSWORD", "asdf1234")
     MYSQL_DB = os.environ.get("MYSQL_DB", "university_portal")
     MYSQL_PORT = int(os.environ.get("MYSQL_PORT", 3306))
 
