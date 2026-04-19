@@ -142,8 +142,19 @@ def create_course(name, code, department_id, credits):
     )
 
 
-# ===== ENROLLMENT MANAGEMENT =====
+def update_course(course_id, name, code, department_id, credits):
+    query_db(
+        "UPDATE courses SET name=%s, code=%s, department_id=%s, credits=%s WHERE id=%s",
+        (name, code, department_id, credits, course_id),
+        commit=True,
+    )
 
+
+def delete_course(course_id):
+    query_db("DELETE FROM courses WHERE id = %s", (course_id,), commit=True)
+
+
+# ===== ENROLLMENT MANAGEMENT =====
 def create_enrollment(student_id, course_id, status='enrolled'):
     query_db(
         "INSERT INTO enrollments (student_id, course_id, status, enrollment_date) VALUES (%s, %s, %s, CURRENT_DATE)",
@@ -313,6 +324,173 @@ def get_admission_by_id(admission_id):
     return query_db("SELECT * FROM admissions WHERE id = %s", (admission_id,), one=True)
 
 
+def get_notices():
+    try:
+        return query_db("SELECT * FROM notices ORDER BY created_at DESC")
+    except Exception:
+        return []
+
+
+def get_testimonials(student_id=None):
+    query = "SELECT * FROM testimonials"
+    args = ()
+    if student_id:
+        query += " WHERE student_id = %s"
+        args = (student_id,)
+    query += " ORDER BY created_at DESC"
+    try:
+        return query_db(query, args)
+    except Exception:
+        return []
+
+
+def get_campus_landscapes():
+    try:
+        return query_db("SELECT * FROM campus_landscapes ORDER BY id DESC")
+    except Exception:
+        return []
+
+
+def get_teachers_authorities():
+    try:
+        return query_db("SELECT * FROM teachers_authority ORDER BY id DESC")
+    except Exception:
+        return []
+
+
+def get_notice_by_id(notice_id):
+    try:
+        return query_db("SELECT * FROM notices WHERE id = %s", (notice_id,), one=True)
+    except Exception:
+        return None
+
+
+def create_notice(title, content):
+    try:
+        query_db(
+            "INSERT INTO notices (title, content) VALUES (%s, %s)",
+            (title, content),
+            commit=True,
+        )
+    except Exception:
+        pass
+
+
+def update_notice(notice_id, title, content):
+    try:
+        query_db(
+            "UPDATE notices SET title=%s, content=%s WHERE id=%s",
+            (title, content, notice_id),
+            commit=True,
+        )
+    except Exception:
+        pass
+
+
+def delete_notice(notice_id):
+    try:
+        query_db("DELETE FROM notices WHERE id = %s", (notice_id,), commit=True)
+    except Exception:
+        pass
+
+
+def get_campus_landscape_by_id(landscape_id):
+    try:
+        return query_db("SELECT * FROM campus_landscapes WHERE id = %s", (landscape_id,), one=True)
+    except Exception:
+        return None
+
+
+def create_campus_landscape(image_url=None):
+    try:
+        query_db(
+            "INSERT INTO campus_landscapes (image_url) VALUES (%s)",
+            (image_url,),
+            commit=True,
+        )
+    except Exception:
+        pass
+
+
+def update_campus_landscape(landscape_id, image_url=None):
+    try:
+        query_db(
+            "UPDATE campus_landscapes SET image_url=%s WHERE id=%s",
+            (image_url, landscape_id),
+            commit=True,
+        )
+    except Exception:
+        pass
+
+
+def delete_campus_landscape(landscape_id):
+    try:
+        query_db("DELETE FROM campus_landscapes WHERE id = %s", (landscape_id,), commit=True)
+    except Exception:
+        pass
+
+
+def get_teacher_authority_by_id(authority_id):
+    try:
+        return query_db("SELECT * FROM teachers_authority WHERE id = %s", (authority_id,), one=True)
+    except Exception:
+        return None
+
+
+def create_teacher_authority(name, role, bio, image_url=None, profile_url=None):
+    try:
+        query_db(
+            "INSERT INTO teachers_authority (name, role, bio, image_url, profile_url) VALUES (%s, %s, %s, %s, %s)",
+            (name, role, bio, image_url, profile_url),
+            commit=True,
+        )
+    except Exception:
+        pass
+
+
+def update_teacher_authority(authority_id, name, role, bio, image_url=None, profile_url=None):
+    try:
+        query_db(
+            "UPDATE teachers_authority SET name=%s, role=%s, bio=%s, image_url=%s, profile_url=%s WHERE id=%s",
+            (name, role, bio, image_url, profile_url, authority_id),
+            commit=True,
+        )
+    except Exception:
+        pass
+
+
+def delete_teacher_authority(authority_id):
+    try:
+        query_db("DELETE FROM teachers_authority WHERE id = %s", (authority_id,), commit=True)
+    except Exception:
+        pass
+
+
+def get_testimonial_by_id(testimonial_id):
+    try:
+        return query_db("SELECT * FROM testimonials WHERE id = %s", (testimonial_id,), one=True)
+    except Exception:
+        return None
+
+
+def create_testimonial(student_id, content):
+    try:
+        query_db(
+            "INSERT INTO testimonials (student_id, content) VALUES (%s, %s)",
+            (student_id, content),
+            commit=True,
+        )
+    except Exception:
+        pass
+
+
+def delete_testimonial(testimonial_id):
+    try:
+        query_db("DELETE FROM testimonials WHERE id = %s", (testimonial_id,), commit=True)
+    except Exception:
+        pass
+
+
 def create_admission(title, description, application_url=None, start_date=None, end_date=None):
     query_db(
         "INSERT INTO admissions (title, description, application_url, start_date, end_date) VALUES (%s, %s, %s, %s, %s)",
@@ -341,3 +519,12 @@ def get_students():
 
 def get_faculty():
     return query_db("SELECT u.*, d.name AS department_name FROM users u LEFT JOIN departments d ON u.department_id = d.id WHERE u.role_id = 2 ORDER BY u.name")
+
+
+def get_admins():
+    return query_db(
+        "SELECT u.*, d.name AS department_name FROM users u "
+        "LEFT JOIN departments d ON u.department_id = d.id "
+        "JOIN roles r ON u.role_id = r.id "
+        "WHERE r.name = 'admin' ORDER BY u.name"
+    )

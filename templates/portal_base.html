@@ -29,8 +29,12 @@
               <li class="nav-item"><a class="nav-link text-white" href="{{ url_for('portal.manage_users') }}">Students</a></li>
                <li class="nav-item"><a class="nav-link text-white" href="{{ url_for('portal.manage_events') }}">Events</a></li>
                 <li class="nav-item"><a class="nav-link text-white" href="{{ url_for('portal.manage_news') }}">News</a></li>
+                <li class="nav-item"><a class="nav-link text-white" href="{{ url_for('portal.manage_notices') }}">Notices</a></li>
               <li class="nav-item"><a class="nav-link text-white" href="{{ url_for('portal.manage_courses') }}">Courses</a></li>
               <li class="nav-item"><a class="nav-link text-white" href="{{ url_for('portal.manage_admissions') }}">Admission</a></li>
+
+              <li class="nav-item"><a class="nav-link text-white" href="{{ url_for('portal.manage_campus_landscape') }}">Landscape</a></li>
+              <li class="nav-item"><a class="nav-link text-white" href="{{ url_for('portal.manage_teachers_authority') }}">Authority</a></li>
             {% elif session.get('role_name') == 'student' %}
               <li class="nav-item"><a class="nav-link text-white" href="{{ url_for('portal.student_dashboard') }}">Dashboard</a></li>
               <li class="nav-item"><a class="nav-link text-white" href="{{ url_for('portal.student_profile') }}">Profile</a></li>

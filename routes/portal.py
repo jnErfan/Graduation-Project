@@ -1,7 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, session
 import datetime
 from routes.auth import login_required, role_required
-from models import query_db
 from models import (
     get_user_by_id,
     get_user_by_email,
@@ -13,6 +12,7 @@ from models import (
     add_attendance,
     get_students,
     get_faculty,
+    get_admins,
     get_departments,
     get_department_by_id,
     create_course,
@@ -22,6 +22,8 @@ from models import (
     get_role_by_name,
     update_user,
     delete_user,
+    update_course,
+    delete_course,
     update_department,
     delete_department,
     get_news,
@@ -44,6 +46,25 @@ from models import (
     create_admission,
     update_admission,
     delete_admission,
+    get_notices,
+    get_notice_by_id,
+    create_notice,
+    update_notice,
+    delete_notice,
+    get_campus_landscapes,
+    get_campus_landscape_by_id,
+    create_campus_landscape,
+    update_campus_landscape,
+    delete_campus_landscape,
+    get_teachers_authorities,
+    get_teacher_authority_by_id,
+    create_teacher_authority,
+    update_teacher_authority,
+    delete_teacher_authority,
+    get_testimonials,
+    get_testimonial_by_id,
+    create_testimonial,
+    delete_testimonial,
     create_enrollment,
 )
 
@@ -62,6 +83,7 @@ def student_dashboard():
     enrollments = get_enrollments(user['id'])
     attendance = get_attendance(student_id=user['id'])
     results = get_results(student_id=user['id'])
+    notices = get_notices()
     attendance_summary = {
         'present': sum(1 for record in attendance if record['status'] == 'present'),
         'absent': sum(1 for record in attendance if record['status'] == 'absent'),
@@ -74,6 +96,7 @@ def student_dashboard():
         enrollments=enrollments,
         attendance=attendance,
         results=results,
+        notices=notices,
         attendance_summary=attendance_summary,
         enrolled_course_ids=enrolled_course_ids,
     )
@@ -112,6 +135,7 @@ def admin_dashboard():
 
     students = get_students()
     faculty = get_faculty()
+    admins = get_admins()
     courses = get_courses()
     departments = get_departments()
     news_items = get_news()
@@ -122,6 +146,7 @@ def admin_dashboard():
         'portal/admin_dashboard.html',
         students=students,
         faculty=faculty,
+        admins=admins,
         courses=courses,
         departments=departments,
         news_count=len(news_items),
@@ -209,6 +234,43 @@ def student_attendance():
         today=today,
     )
 
+
+@portal_bp.route('/student/testimonials', methods=['GET', 'POST'])
+@login_required
+@role_required('student')
+def student_testimonials():
+    user = current_user()
+    if request.method == 'POST':
+        content = request.form.get('content', '').strip()
+        if not content:
+            flash('Please write a review before submitting.', 'danger')
+            return redirect(url_for('portal.student_testimonials'))
+        create_testimonial(user['id'], content)
+        flash('Your testimonial has been posted.', 'success')
+        return redirect(url_for('portal.student_testimonials'))
+
+    testimonials = get_testimonials()
+    user_testimonials = get_testimonials(student_id=user['id'])
+    return render_template(
+        'portal/student_testimonials.html',
+        user=user,
+        testimonials=testimonials,
+        user_testimonials=user_testimonials,
+    )
+
+
+@portal_bp.route('/student/testimonials/delete/<int:testimonial_id>')
+@login_required
+@role_required('student')
+def delete_student_testimonial(testimonial_id):
+    user = current_user()
+    testimonial = get_testimonial_by_id(testimonial_id)
+    if not testimonial or testimonial['student_id'] != user['id']:
+        flash('Unable to delete this testimonial.', 'danger')
+        return redirect(url_for('portal.student_testimonials'))
+    delete_testimonial(testimonial_id)
+    flash('Your testimonial was deleted.', 'success')
+    return redirect(url_for('portal.student_testimonials'))
 
 
 @portal_bp.route('/student/results')
@@ -308,7 +370,166 @@ def manage_news():
     return render_template('portal/manage_news.html', news_items=news_items)
 
 
+@portal_bp.route('/admin/manage-notices', methods=['GET', 'POST'])
+@login_required
+@role_required('admin')
+def manage_notices():
+    if request.method == 'POST':
+        if request.form.get('notice_id'):
+            update_notice(
+                request.form['notice_id'],
+                request.form['title'],
+                request.form['content'],
+            )
+            flash('Notice updated successfully.', 'success')
+        else:
+            create_notice(
+                request.form['title'],
+                request.form['content'],
+            )
+            flash('Notice added successfully.', 'success')
+        return redirect(url_for('portal.manage_notices'))
 
+    notices = get_notices()
+    return render_template('portal/manage_notices.html', notices=notices)
+
+
+@portal_bp.route('/admin/notices/delete/<int:notice_id>')
+@login_required
+@role_required('admin')
+def delete_notice_item(notice_id):
+    delete_notice(notice_id)
+    flash('Notice deleted.', 'success')
+    return redirect(url_for('portal.manage_notices'))
+
+
+@portal_bp.route('/admin/notices/edit/<int:notice_id>', methods=['GET', 'POST'])
+@login_required
+@role_required('admin')
+def edit_notice(notice_id):
+    item = get_notice_by_id(notice_id)
+    if not item:
+        flash('Notice not found.', 'danger')
+        return redirect(url_for('portal.manage_notices'))
+    if request.method == 'POST':
+        update_notice(
+            notice_id,
+            request.form['title'],
+            request.form['content'],
+        )
+        flash('Notice updated successfully.', 'success')
+        return redirect(url_for('portal.manage_notices'))
+    return render_template('portal/edit_notice.html', item=item)
+
+
+@portal_bp.route('/admin/manage-campus-landscape', methods=['GET', 'POST'])
+@login_required
+@role_required('admin')
+def manage_campus_landscape():
+    if request.method == 'POST':
+        if request.form.get('landscape_id'):
+            update_campus_landscape(
+                request.form['landscape_id'],
+                request.form.get('image_url'),
+            )
+            flash('Campus landscape item updated successfully.', 'success')
+        else:
+            create_campus_landscape(
+                request.form.get('image_url'),
+            )
+            flash('Campus landscape item added successfully.', 'success')
+        return redirect(url_for('portal.manage_campus_landscape'))
+
+    landscapes = get_campus_landscapes()
+    return render_template('portal/manage_campus_landscape.html', landscapes=landscapes)
+
+
+@portal_bp.route('/admin/campus-landscape/delete/<int:landscape_id>')
+@login_required
+@role_required('admin')
+def delete_campus_landscape_item(landscape_id):
+    delete_campus_landscape(landscape_id)
+    flash('Campus landscape item deleted.', 'success')
+    return redirect(url_for('portal.manage_campus_landscape'))
+
+
+@portal_bp.route('/admin/campus-landscape/edit/<int:landscape_id>', methods=['GET', 'POST'])
+@login_required
+@role_required('admin')
+def edit_campus_landscape(landscape_id):
+    item = get_campus_landscape_by_id(landscape_id)
+    if not item:
+        flash('Campus landscape item not found.', 'danger')
+        return redirect(url_for('portal.manage_campus_landscape'))
+    if request.method == 'POST':
+        update_campus_landscape(
+            landscape_id,
+            request.form.get('image_url'),
+        )
+        flash('Campus landscape item updated successfully.', 'success')
+        return redirect(url_for('portal.manage_campus_landscape'))
+    return render_template('portal/edit_campus_landscape.html', item=item)
+
+
+@portal_bp.route('/admin/manage-teachers-authority', methods=['GET', 'POST'])
+@login_required
+@role_required('admin')
+def manage_teachers_authority():
+    if request.method == 'POST':
+        if request.form.get('authority_id'):
+            update_teacher_authority(
+                request.form['authority_id'],
+                request.form['name'],
+                request.form['role'],
+                request.form['bio'],
+                request.form.get('image_url'),
+                request.form.get('profile_url'),
+            )
+            flash('Teacher/authority item updated successfully.', 'success')
+        else:
+            create_teacher_authority(
+                request.form['name'],
+                request.form['role'],
+                request.form['bio'],
+                request.form.get('image_url'),
+                request.form.get('profile_url'),
+            )
+            flash('Teacher/authority item added successfully.', 'success')
+        return redirect(url_for('portal.manage_teachers_authority'))
+
+    authorities = get_teachers_authorities()
+    return render_template('portal/manage_teachers_authority.html', authorities=authorities)
+
+
+@portal_bp.route('/admin/teachers-authority/delete/<int:authority_id>')
+@login_required
+@role_required('admin')
+def delete_teachers_authority_item(authority_id):
+    delete_teacher_authority(authority_id)
+    flash('Teacher/authority item deleted.', 'success')
+    return redirect(url_for('portal.manage_teachers_authority'))
+
+
+@portal_bp.route('/admin/teachers-authority/edit/<int:authority_id>', methods=['GET', 'POST'])
+@login_required
+@role_required('admin')
+def edit_teachers_authority(authority_id):
+    item = get_teacher_authority_by_id(authority_id)
+    if not item:
+        flash('Teacher/authority item not found.', 'danger')
+        return redirect(url_for('portal.manage_teachers_authority'))
+    if request.method == 'POST':
+        update_teacher_authority(
+            authority_id,
+            request.form['name'],
+            request.form['role'],
+            request.form['bio'],
+            request.form.get('image_url'),
+            request.form.get('profile_url'),
+        )
+        flash('Teacher/authority item updated successfully.', 'success')
+        return redirect(url_for('portal.manage_teachers_authority'))
+    return render_template('portal/edit_teachers_authority.html', item=item)
 
 
 @portal_bp.route('/admin/news/delete/<int:news_id>')
@@ -551,6 +772,36 @@ def manage_courses():
         return redirect(url_for('portal.manage_courses'))
     return render_template('portal/manage_courses.html', courses=courses, departments=departments)
 
+
+@portal_bp.route('/admin/course/delete/<int:course_id>')
+@login_required
+@role_required('admin')
+def delete_course_item(course_id):
+    delete_course(course_id)
+    flash('Course deleted successfully.', 'success')
+    return redirect(url_for('portal.manage_courses'))
+
+
+@portal_bp.route('/admin/course/edit/<int:course_id>', methods=['GET', 'POST'])
+@login_required
+@role_required('admin')
+def edit_course(course_id):
+    course = get_course_by_id(course_id)
+    if not course:
+        flash('Course not found.', 'danger')
+        return redirect(url_for('portal.manage_courses'))
+    departments = get_departments()
+    if request.method == 'POST':
+        update_course(
+            course_id,
+            request.form['name'],
+            request.form['code'],
+            request.form['department_id'],
+            request.form['credits'],
+        )
+        flash('Course updated successfully.', 'success')
+        return redirect(url_for('portal.manage_courses'))
+    return render_template('portal/edit_course.html', course=course, departments=departments)
 
 
 @portal_bp.route('/admin/manage-departments', methods=['GET', 'POST'])

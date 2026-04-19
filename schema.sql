@@ -1,17 +1,14 @@
 -- University Portal Database Schema
--- Core tables for academic portal
 
 CREATE DATABASE IF NOT EXISTS university_portal CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE university_portal;
 
--- User roles
 CREATE TABLE roles (
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(50) NOT NULL UNIQUE,
   description VARCHAR(255)
 );
 
--- Academic departments
 CREATE TABLE departments (
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(128) NOT NULL,
@@ -19,7 +16,6 @@ CREATE TABLE departments (
   description TEXT
 );
 
--- Users (students, faculty, admins)
 CREATE TABLE users (
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(128) NOT NULL,
@@ -32,7 +28,6 @@ CREATE TABLE users (
   FOREIGN KEY (department_id) REFERENCES departments(id) ON DELETE SET NULL
 );
 
--- Courses
 CREATE TABLE courses (
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(128) NOT NULL,
@@ -43,7 +38,6 @@ CREATE TABLE courses (
   FOREIGN KEY (department_id) REFERENCES departments(id) ON DELETE CASCADE
 );
 
--- Course enrollments
 CREATE TABLE enrollments (
   id INT AUTO_INCREMENT PRIMARY KEY,
   student_id INT NOT NULL,
@@ -55,7 +49,6 @@ CREATE TABLE enrollments (
   UNIQUE KEY student_course (student_id, course_id)
 );
 
--- Student attendance
 CREATE TABLE attendance (
   id INT AUTO_INCREMENT PRIMARY KEY,
   student_id INT NOT NULL,
@@ -67,7 +60,6 @@ CREATE TABLE attendance (
   FOREIGN KEY (course_id) REFERENCES courses(id) ON DELETE CASCADE
 );
 
--- Student results
 CREATE TABLE results (
   id INT AUTO_INCREMENT PRIMARY KEY,
   student_id INT NOT NULL,
@@ -79,7 +71,6 @@ CREATE TABLE results (
   FOREIGN KEY (course_id) REFERENCES courses(id) ON DELETE CASCADE
 );
 
--- Public news
 CREATE TABLE news (
   id INT AUTO_INCREMENT PRIMARY KEY,
   title VARCHAR(255) NOT NULL,
@@ -90,7 +81,6 @@ CREATE TABLE news (
   published_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Campus events
 CREATE TABLE events (
   id INT AUTO_INCREMENT PRIMARY KEY,
   title VARCHAR(255) NOT NULL,
@@ -104,7 +94,6 @@ CREATE TABLE events (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Academic programs
 CREATE TABLE programs (
   id INT AUTO_INCREMENT PRIMARY KEY,
   title VARCHAR(255) NOT NULL,
@@ -115,7 +104,6 @@ CREATE TABLE programs (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Admissions information
 CREATE TABLE admissions (
   id INT AUTO_INCREMENT PRIMARY KEY,
   title VARCHAR(255) NOT NULL,
@@ -126,45 +114,11 @@ CREATE TABLE admissions (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Student testimonials
-CREATE TABLE testimonials (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  student_id INT NOT NULL,
-  content TEXT NOT NULL,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (student_id) REFERENCES users(id) ON DELETE CASCADE
-);
-
--- Teachers and authority information
-CREATE TABLE teachers_authority (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(128) NOT NULL,
-  position VARCHAR(128) NOT NULL,
-  department VARCHAR(128),
-  email VARCHAR(128),
-  phone VARCHAR(32),
-  bio TEXT,
-  image_url VARCHAR(255),
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
--- Campus landscape information
-CREATE TABLE campus_landscape (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  title VARCHAR(128) NOT NULL,
-  description TEXT,
-  image_url VARCHAR(255),
-  category VARCHAR(64), -- e.g., 'buildings', 'gardens', 'facilities'
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
--- Insert default roles
 INSERT INTO roles (name, description) VALUES
 ('student', 'Student account with access to registration, attendance, and results'),
 ('faculty', 'Faculty account can manage attendance and marks'),
 ('admin', 'Administrator account for managing users, courses, and departments');
 
--- Insert default departments
 INSERT INTO departments (name, code, description) VALUES
 ('Computer Science', 'CS', 'Computer Science and Engineering'),
 ('Business Administration', 'BA', 'Business and Management programs'),

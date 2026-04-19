@@ -20,14 +20,22 @@ document.addEventListener('DOMContentLoaded', function () {
 
   const preloaderTimer = window.setTimeout(hidePreloader, 5000);
 
+  const showPageAnimation = () => {
+    document.querySelectorAll('.page-animation').forEach((element) => {
+      element.classList.add('show');
+    });
+  };
+
   if (document.readyState === 'complete') {
     window.clearTimeout(preloaderTimer);
     hidePreloader();
+    showPageAnimation();
   }
 
   window.addEventListener('load', () => {
     window.clearTimeout(preloaderTimer);
     hidePreloader();
+    showPageAnimation();
   });
 
   const translationButton = document.getElementById('translation-toggle');
@@ -155,8 +163,77 @@ document.addEventListener('DOMContentLoaded', function () {
   const savedLanguage = localStorage.getItem('siteLanguage') || 'en';
   setLanguage(savedLanguage);
 
+  // Counter animation function
+  function animateCounter(element, target, duration = 2000) {
+    const start = 0;
+    const end = parseInt(target.replace(/[^\d]/g, ''));
+    const startTime = performance.now();
+    const suffix = target.replace(/[\d]/g, ''); // Extract non-numeric suffix like '%'
+
+    function updateCounter(currentTime) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      
+      // Easing function for smooth animation
+      const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+      const current = Math.floor(start + (end - start) * easeOutQuart);
+      
+      element.textContent = current.toLocaleString() + suffix;
+      
+      if (progress < 1) {
+        requestAnimationFrame(updateCounter);
+      } else {
+        element.textContent = target;
+      }
+    }
+    
+    requestAnimationFrame(updateCounter);
+  }
+
+  // Initialize counter animations when they come into view
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const counters = entry.target.querySelectorAll('.counter-number');
+        counters.forEach(counter => {
+          const target = counter.getAttribute('data-target');
+          if (target && !counter.classList.contains('animated')) {
+            counter.classList.add('animated');
+            animateCounter(counter, target);
+          }
+        });
+        counterObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  // Observe elements containing counters
+  document.querySelectorAll('.stats-row, .stagger-container').forEach(container => {
+    counterObserver.observe(container);
+  });
+
+  // Stagger animation for elements
+  const staggerObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const staggerItems = entry.target.querySelectorAll('.stagger-item');
+        staggerItems.forEach((item, index) => {
+          setTimeout(() => {
+            item.classList.add('show');
+          }, index * 150); // 150ms delay between each item
+        });
+        staggerObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  // Observe stagger containers
+  document.querySelectorAll('.stagger-container').forEach(container => {
+    staggerObserver.observe(container);
+  });
+
   const revealTargets = document.querySelectorAll(
-    'section, .card, .info-box, .stats-card, .event-card, .contact-card, .hero-banner img, .section-title'
+    'section, .navbar, footer, .card, .info-box, .stats-card, .event-card, .contact-card, .metric-card, .program-card, .testimonial-card, .story-card, .story-image-card, .hero-banner img, .hero-badge, .event-strip, .section-title'
   );
 
   if ('IntersectionObserver' in window) {
@@ -184,244 +261,4 @@ document.addEventListener('DOMContentLoaded', function () {
       target.classList.add('show');
     });
   }
-
-  // ===== ADVANCED ANIMATIONS =====
-
-  // Number Counter Animation
-  function animateCounter(element, target, duration = 2000) {
-    const start = parseInt(element.textContent) || 0;
-    const increment = (target - start) / (duration / 16);
-    let current = start;
-
-    element.classList.add('counting');
-
-    const timer = setInterval(() => {
-      current += increment;
-      if ((increment > 0 && current >= target) || (increment < 0 && current <= target)) {
-        element.textContent = target.toLocaleString();
-        element.classList.remove('counting');
-        clearInterval(timer);
-      } else {
-        element.textContent = Math.floor(current).toLocaleString();
-      }
-    }, 16);
-  }
-
-  // Initialize counter animations
-  function initCounters() {
-    const counters = document.querySelectorAll('.counter-number');
-
-    if ('IntersectionObserver' in window) {
-      const counterObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && !entry.target.hasAttribute('data-animated')) {
-            entry.target.setAttribute('data-animated', 'true');
-            const target = parseInt(entry.target.getAttribute('data-target')) || 0;
-            animateCounter(entry.target, target);
-          }
-        });
-      }, { threshold: 0.5 });
-
-      counters.forEach((counter) => {
-        counterObserver.observe(counter);
-      });
-    } else {
-      // Fallback for browsers without IntersectionObserver
-      counters.forEach((counter) => {
-        const target = parseInt(counter.getAttribute('data-target')) || 0;
-        animateCounter(counter, target);
-      });
-    }
-  }
-
-  // Staggered animations for lists
-  function initStaggeredAnimations() {
-    const staggerContainers = document.querySelectorAll('.stagger-container');
-
-    staggerContainers.forEach((container) => {
-      const items = container.querySelectorAll('.stagger-item');
-
-      if ('IntersectionObserver' in window) {
-        const staggerObserver = new IntersectionObserver((entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              items.forEach((item, index) => {
-                setTimeout(() => {
-                  item.classList.add('show');
-                }, index * 100);
-              });
-              staggerObserver.unobserve(entry.target);
-            }
-          });
-        }, { threshold: 0.3 });
-
-        staggerObserver.observe(container);
-      } else {
-        items.forEach((item, index) => {
-          setTimeout(() => {
-            item.classList.add('show');
-          }, index * 100);
-        });
-      }
-    });
-  }
-
-  // Advanced scroll animations with different effects
-  function initAdvancedScrollAnimations() {
-    const animatedElements = document.querySelectorAll('[data-animation]');
-
-    if ('IntersectionObserver' in window) {
-      const animationObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const animationType = entry.target.getAttribute('data-animation');
-            const delay = entry.target.getAttribute('data-delay') || 0;
-
-            setTimeout(() => {
-              entry.target.classList.add(`${animationType}-animation`);
-            }, delay);
-
-            animationObserver.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.2 });
-
-      animatedElements.forEach((element) => {
-        animationObserver.observe(element);
-      });
-    }
-  }
-
-  // Magnetic hover effect
-  function initMagneticEffect() {
-    const magneticElements = document.querySelectorAll('.magnetic');
-
-    magneticElements.forEach((element) => {
-      element.addEventListener('mousemove', (e) => {
-        const rect = element.getBoundingClientRect();
-        const x = e.clientX - rect.left - rect.width / 2;
-        const y = e.clientY - rect.top - rect.height / 2;
-
-        element.style.transform = `translate(${x * 0.1}px, ${y * 0.1}px)`;
-      });
-
-      element.addEventListener('mouseleave', () => {
-        element.style.transform = 'translate(0px, 0px)';
-      });
-    });
-  }
-
-  // Typing animation
-  function initTypingAnimation() {
-    const typingElements = document.querySelectorAll('.typing-text');
-
-    typingElements.forEach((element) => {
-      const text = element.textContent;
-      element.textContent = '';
-      element.classList.add('typing-animation');
-
-      let i = 0;
-      const timer = setInterval(() => {
-        if (i < text.length) {
-          element.textContent += text.charAt(i);
-          i++;
-        } else {
-          clearInterval(timer);
-          element.classList.remove('typing-animation');
-        }
-      }, 100);
-    });
-  }
-
-  // Progress bar animations
-  function initProgressBars() {
-    const progressBars = document.querySelectorAll('.progress-animated');
-
-    progressBars.forEach((bar) => {
-      const width = bar.getAttribute('data-width') || '75%';
-      bar.style.setProperty('--progress-width', width);
-      bar.classList.add('progress-fill');
-    });
-  }
-
-  // Particle effect
-  function createParticles() {
-    const particleContainers = document.querySelectorAll('.particle-container');
-
-    particleContainers.forEach((container) => {
-      for (let i = 0; i < 5; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'particle';
-        particle.style.left = `${Math.random() * 100}%`;
-        particle.style.animationDelay = `${Math.random() * 3}s`;
-        container.appendChild(particle);
-      }
-    });
-  }
-
-  // Enhanced hover effects
-  function initEnhancedHovers() {
-    const hoverElements = document.querySelectorAll('.hover-lift, .hover-rotate, .hover-scale');
-
-    hoverElements.forEach((element) => {
-      element.addEventListener('mouseenter', () => {
-        element.style.zIndex = '10';
-      });
-
-      element.addEventListener('mouseleave', () => {
-        element.style.zIndex = 'auto';
-      });
-    });
-  }
-
-  // Morphing animations
-  function initMorphingElements() {
-    const morphElements = document.querySelectorAll('.morph-trigger');
-
-    morphElements.forEach((element) => {
-      element.addEventListener('click', () => {
-        const target = document.querySelector(element.getAttribute('data-target'));
-        if (target) {
-          target.classList.add('morph-animation');
-          setTimeout(() => {
-            target.classList.remove('morph-animation');
-          }, 4000);
-        }
-      });
-    });
-  }
-
-  // Initialize all advanced animations
-  initCounters();
-  initStaggeredAnimations();
-  initAdvancedScrollAnimations();
-  initMagneticEffect();
-  initTypingAnimation();
-  initProgressBars();
-  createParticles();
-  initEnhancedHovers();
-  initMorphingElements();
-
-  // Performance optimization - reduce animations on low-power devices
-  if ('deviceMemory' in navigator && navigator.deviceMemory < 4) {
-    document.documentElement.classList.add('reduced-motion');
-  }
-
-  // Add loading states
-  const buttons = document.querySelectorAll('.btn');
-  buttons.forEach((button) => {
-    button.addEventListener('click', function() {
-      if (this.form && !this.form.checkValidity()) return;
-
-      const originalText = this.innerHTML;
-      this.innerHTML = '<span class="loading-dots"><span></span><span></span><span></span></span>';
-      this.disabled = true;
-
-      setTimeout(() => {
-        this.innerHTML = originalText;
-        this.disabled = false;
-      }, 2000);
-    });
-  });
-
 });

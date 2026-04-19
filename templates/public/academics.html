@@ -8,6 +8,7 @@
       <h1 class="section-title">Vocational training and international study</h1>
       <p class="text-muted">The School of International Education offers study programs, training, and support services for overseas students at JSAFC.</p>
        <a href="#programs" class="btn btn-primary btn-lg mt-3">Explore Programs</a>
+       <a href="#notice" class="btn btn-outline-primary bg-dark btn-lg mt-3">Notice Board</a>
     </div>
     <div class="col-md-5 text-md-end">
       <nav aria-label="breadcrumb">
@@ -84,109 +85,46 @@
     </div>
     <div class="col-md-6">
       <img src="https://images.pexels.com/photos/1181536/pexels-photo-1181536.jpeg?auto=compress&cs=tinysrgb&w=1200" class="img-fluid rounded-4 shadow-xl" alt="Training in progress">
-  </div>
-</section>
-
-<section class="py-5 bg-light rounded-4">
-  <div class="row align-items-center g-4">
-    <div class="col-lg-6">
-      <h2 class="section-title">Student support and resources</h2>
-      <p class="text-muted">SIE provides support for registration, online learning, student associations, and scholarship applications.</p>
-      <ul class="list-unstyled mt-4">
-        <li class="mb-3"><strong>Online Learning:</strong> Flexible resources and remote study options.</li>
-        <li class="mb-3"><strong>Student Association:</strong> Cultural events and academic support activities.</li>
-        <li><strong>Scholarships:</strong> Government and college awards for international students.</li>
-      </ul>
-    </div>
-    <div class="col-lg-6">
-      <img src="https://images.pexels.com/photos/1181536/pexels-photo-1181536.jpeg?auto=compress&cs=tinysrgb&w=1200" class="img-fluid rounded-4 shadow-xl" alt="Training in progress">
     </div>
   </div>
 </section>
 
-<section class="py-5">
+<section class="section section-noticeboard  rounded-4  py-5 bg-gradient position-relative overflow-hidden" id="notice">
   <div class="container">
-    <div class="text-center mb-5">
-      <span class="eyebrow text-primary fw-semibold">Career Opportunities</span>
-      <h2 class="display-5 fw-bold mb-3">Launch Your Career</h2>
-      <p class="text-muted mx-auto" style="max-width: 600px;">Our graduates work in leading positions across agriculture, forestry, and related industries worldwide.</p>
-    </div>
-    <div class="row g-4">
-      <div class="col-md-6 col-lg-4">
-        <div class="career-card rounded-4 shadow-sm bg-white p-4 h-100">
-          <div class="career-icon mb-3">
-            <i class="bi bi-briefcase display-4 text-primary"></i>
-          </div>
-          <h5 class="mb-3">Agricultural Consultant</h5>
-          <p class="text-muted mb-3">Provide expert advice on farming techniques, crop management, and sustainable practices.</p>
-          <div class="salary-badge">Starting: $45,000/year</div>
+    <div class="noticeboard-panel rounded-4 shadow-xl p-4 p-md-5 bg-white position-relative" style="z-index: 1;">
+      <div class="d-flex flex-column flex-md-row align-items-start align-items-md-center justify-content-between gap-3 mb-4">
+        <div>
+          <span class="eyebrow text-primary fw-semibold">Notice Board</span>
+          <h2 class="display-6 fw-bold mb-2">Latest campus updates from administration</h2>
+          <p class="text-muted mb-0">Fresh announcements published by the admin team, visible to students and visitors.</p>
+        </div>
+        <div class="text-md-end">
+          <span class="badge bg-primary py-2 px-3">{{ notices|length }} active</span>
         </div>
       </div>
-      <div class="col-md-6 col-lg-4">
-        <div class="career-card rounded-4 shadow-sm bg-white p-4 h-100">
-          <div class="career-icon mb-3">
-            <i class="bi bi-tree display-4 text-success"></i>
+
+      <div class="row g-3">
+        {% for notice in notices[:4] %}
+        <div class="col-lg-6">
+          <div class="notice-card rounded-4 border border-2 border-light p-4 h-100 shadow-sm bg-white">
+            <div class="d-flex justify-content-between align-items-start mb-3">
+              <div>
+                <h5 class="mb-2">{{ notice.title }}</h5>
+                <small class="text-muted">{{ notice.created_at }}</small>
+              </div>
+              <span class="badge bg-soft-primary text-primary py-2 px-3">Admin</span>
+            </div>
+            <p class="text-secondary mb-0">{{ notice.content }}</p>
           </div>
-          <h5 class="mb-3">Forestry Manager</h5>
-          <p class="text-muted mb-3">Oversee forest conservation, timber harvesting, and environmental protection projects.</p>
-          <div class="salary-badge">Starting: $50,000/year</div>
         </div>
-      </div>
-      <div class="col-md-6 col-lg-4">
-        <div class="career-card rounded-4 shadow-sm bg-white p-4 h-100">
-          <div class="career-icon mb-3">
-            <i class="bi bi-flower1 display-4 text-info"></i>
-          </div>
-          <h5 class="mb-3">Horticulture Specialist</h5>
-          <p class="text-muted mb-3">Manage gardens, nurseries, and landscaping projects for commercial and public spaces.</p>
-          <div class="salary-badge">Starting: $40,000/year</div>
+        {% else %}
+        <div class="col-12">
+          <div class="alert alert-info rounded-4">No notices are available right now. Check back soon for university announcements.</div>
         </div>
-      </div>
-      <div class="col-md-6 col-lg-4">
-        <div class="career-card rounded-4 shadow-sm bg-white p-4 h-100">
-          <div class="career-icon mb-3">
-            <i class="bi bi-bar-chart display-4 text-warning"></i>
-          </div>
-          <h5 class="mb-3">Agricultural Researcher</h5>
-          <p class="text-muted mb-3">Conduct research on crop improvement, pest control, and sustainable farming methods.</p>
-          <div class="salary-badge">Starting: $55,000/year</div>
-        </div>
-      </div>
-      <div class="col-md-6 col-lg-4">
-        <div class="career-card rounded-4 shadow-sm bg-white p-4 h-100">
-          <div class="career-icon mb-3">
-            <i class="bi bi-shop display-4 text-danger"></i>
-          </div>
-          <h5 class="mb-3">Farm Manager</h5>
-          <p class="text-muted mb-3">Oversee daily operations of farms, supervise staff, and manage agricultural production.</p>
-          <div class="salary-badge">Starting: $60,000/year</div>
-        </div>
-      </div>
-      <div class="col-md-6 col-lg-4">
-        <div class="career-card rounded-4 shadow-sm bg-white p-4 h-100">
-          <div class="career-icon mb-3">
-            <i class="bi bi-globe display-4 text-secondary"></i>
-          </div>
-          <h5 class="mb-3">International Development</h5>
-          <p class="text-muted mb-3">Work with NGOs and international organizations on agricultural development projects.</p>
-          <div class="salary-badge">Starting: $48,000/year</div>
-        </div>
+        {% endfor %}
       </div>
     </div>
   </div>
+  <div class="noticeboard-background position-absolute top-0 start-0 w-100 h-100" style="background: radial-gradient(circle at top right, rgba(13, 110, 253, 0.14), transparent 35%), radial-gradient(circle at bottom left, rgba(0, 123, 255, 0.08), transparent 28%);"></div>
 </section>
-
-<section class="py-5 bg-primary text-white">
-  <div class="container">
-    <div class="text-center">
-      <h2 class="display-5 fw-bold mb-3">Ready to Excel in Your Field?</h2>
-      <p class="lead mb-4">Join our comprehensive programs and gain the skills employers are looking for.</p>
-      <div class="d-flex flex-wrap justify-content-center gap-3">
-        <a href="{{ url_for('public.admissions') }}" class="btn btn-light btn-lg">Start Your Application</a>
-        <a href="#programs" class="btn btn-outline-light btn-lg">Explore Programs</a>
-      </div>
-    </div>
-  </div>
-</section>
-
 {% endblock %}

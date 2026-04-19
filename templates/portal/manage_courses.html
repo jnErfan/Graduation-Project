@@ -55,9 +55,13 @@
                 <td>{{ course.code }}</td>
                 <td>{{ course.department_name or '—' }}</td>
                 <td>{{ course.credits }}</td>
+                <td class="text-end table-actions">
+                  <a href="{{ url_for('portal.edit_course', course_id=course.id) }}" class="btn btn-sm btn-outline-secondary">Edit</a>
+                  <a href="{{ url_for('portal.delete_course_item', course_id=course.id) }}" class="btn btn-sm btn-danger">Delete</a>
+                </td>
               </tr>
               {% else %}
-              <tr><td colspan="4" class="text-center">No courses found.</td></tr>
+              <tr><td colspan="5" class="text-center">No courses found.</td></tr>
               {% endfor %}
             </tbody>
           </table>

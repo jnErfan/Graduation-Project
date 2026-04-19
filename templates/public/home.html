@@ -1,3 +1,4 @@
+
 {% extends 'base.html' %}
 {% block title %}JSAFC{% endblock %}
 {% block content %}
@@ -16,13 +17,13 @@
         <div class="row g-3 mt-5  stats-row hero-stat-card bg-white shadow-sm  rounded-1  pb-3 text-center">
           <div class="col-sm-4">
             <div class="">
-              <h2 class="mb-1 counter-number" data-target="96">0</h2><span>%</span>
+              <h2 class="mb-1 counter-number" data-target="96%">0</h2>
               <p class="mb-0 text-muted">EMPLOYMENT RATE</p>
             </div>
           </div>
           <div class="col-sm-4">
             <div class="">
-              <h2 class="mb-1 counter-number" data-target="12">0</h2><span>%</span>
+              <h2 class="mb-1 counter-number" data-target="12%">0</h2>
               <p class="mb-0 text-muted">TEACHERS RATIO</p>
             </div>
           </div>
@@ -82,7 +83,7 @@
           <p class="text-muted mb-0">Supporting vocational training across multiple campuses.</p>
         </div>
       </div>
-      <div class="col-md-3 stagger-item">
+      <div class="col-md-2 stagger-item">
         <div class="metric-card rounded-4 shadow-sm h-100 text-center bg-white p-4 hover-lift">
           <div class="value-icon mb-3 float-animation"><i class="bi bi-people"></i></div>
           <div class="metric-value counter-number" data-target="65">0</div>
@@ -104,16 +105,22 @@
 
 
 
-<section class="section section-light py-5">
+<section class="section story-section">
+  <div class="story-section-video-bg">
+    <video autoplay muted loop playsinline class="story-section-video">
+      <source src="{{ url_for('static', filename='videos/header.mp4') }}" type="video/mp4">
+    </video>
+    <div class="story-section-overlay"></div>
+  </div>
   <div class="container">
-    <div class="row align-items-center gy-5">
-      <div class="col-lg-6">
-        <span class="eyebrow text-primary fw-semibold">Our Story</span>
-        <h2 class="display-5 fw-bold mb-4">Educating Minds, Inspiring Hearts</h2>
-        <p class="lead text-secondary mb-5">JSAFC & Its International Education School</p>
+    <div class="row align-items-center gy-5 stagger-container">
+      <div class="col-lg-5">
+        <span class="eyebrow text-white fw-semibold">Our Story</span>
+        <h2 class="display-5 fw-bold mb-4 text-white">Educating Minds, Inspiring Hearts</h2>
+        <p class="lead text-white-75 mb-5">JSAFC & Its International Education School</p>
 
         <div class="timeline-list stagger-container">
-          <div class="timeline-item mb-4">
+          <div class="timeline-item mb-4 stagger-item">
             <div class="timeline-date">1923</div>
             <p>Founded: 1923 — one of China’s oldest vocational institutions with a long history in agricultural and technical education.</p>
           </div>
@@ -131,26 +138,33 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-6">
+      <div class="col-lg-6 position-relative">
         <div class="rounded-4 overflow-hidden shadow-xl story-image-card stagger-item">
-          <img src="{{ url_for('static', filename='images/campus.png') }}" class="img-fluid" alt="University courtyard">
+          <video width="100%" height="100%" loop muted autoplay playsinline class="story-video" preload="metadata">
+            <source src="{{ url_for('static', filename='videos/header.mp4') }}" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
         </div>
       </div>
     </div>
 
-    <div class="row g-4 mt-5">
+    <div class="row">
       <div class="col-md-6">
-        <div class="story-card rounded-4 bg-white shadow-sm h-100 p-4 hover-lift">
-          <h5 class="story-card-title mb-3">Our Mission</h5>
-          <p class="text-muted mb-0">Empower students from around the world by providing a high-quality education that combines innovative teaching with real-world experience.</p>
+        <div class="story-card rounded-4 shadow-sm h-100 p-4 hover-lift">
+          <h5 class="story-card-title mb-3 text-white">Our Mission</h5>
+          <p class="mb-0 text-white-75">Empower students from around the world by providing a high-quality education that combines innovative teaching with real-world experience.</p>
         </div>
       </div>
       <div class="col-md-6">
-        <div class="story-card rounded-4 bg-white shadow-sm h-100 p-4 hover-lift">
-          <h5 class="story-card-title mb-3">Our Vision</h5>
-          <p class="text-muted mb-0">Shape future leaders who are not only experts in their fields but also culturally aware and socially responsible.</p>
+        <div class="story-card rounded-4 shadow-sm h-100 p-4 hover-lift">
+          <h5 class="story-card-title mb-3 text-white">Our Vision</h5>
+          <p class="mb-0 text-white-75">Shape future leaders who are not only experts in their fields but also culturally aware and socially responsible.</p>
         </div>
       </div>
+    </div>
+
+    <div class="text-center">
+      <a href="{{ url_for('public.academics') }}" class="btn btn-dark btn-lg">Explore Our Programs</a>
     </div>
   </div>
 </section>
@@ -173,38 +187,6 @@
           <img src="http://en.sie.jsafc.edu.cn/images/22/03/29/1so4rgysk0/457244CADAC756A307382AD4D09_233420C4_8C902.jpg" class="img-fluid" alt="Campus landscape">
         </div>
       </div>
-    </div>
-  </div>
-</section>
-<section class="section py-5">
-  <div class="container">
-    <div class="text-center mb-5">
-      <span class="eyebrow text-primary fw-semibold">Academic Programs</span>
-      <h2 class="display-5 fw-bold mb-3">Explore Our Programs</h2>
-      <p class="text-muted mx-auto" style="max-width: 600px;">Choose from a variety of vocational programs designed to prepare you for successful careers in agriculture, forestry, and related fields.</p>
-    </div>
-    <div class="row g-4">
-      {% for program in programs[:6] %}
-      <div class="col-md-6 col-lg-4">
-        <div class="program-card rounded-4 shadow-sm h-100 bg-white p-4">
-          {% if program.image_url %}
-          <img src="{{ program.image_url }}" class="card-img-top rounded-3 mb-3" alt="{{ program.title }}">
-          {% endif %}
-          <h5 class="card-title">{{ program.title }}</h5>
-          <p class="card-text text-muted">{{ program.description[:100] }}...</p>
-          {% if program.link_url %}
-          <a href="{{ program.link_url }}" class="btn btn-outline-primary">Learn More</a>
-          {% endif %}
-        </div>
-      </div>
-      {% else %}
-      <div class="col-12">
-        <div class="alert alert-secondary text-center">Programs are being updated. Check back soon!</div>
-      </div>
-      {% endfor %}
-    </div>
-    <div class="text-center mt-5">
-      <a href="{{ url_for('public.academics') }}" class="btn btn-primary btn-lg">View All Programs</a>
     </div>
   </div>
 </section>
@@ -433,3 +415,7 @@
   </div>
 </section>
 {% endblock %}
+
+
+
+

@@ -2,33 +2,34 @@
 {% block title %}Login | JSAFC SIE{% endblock %}
 {% block content %}
 <section class="hero-landing overflow-hidden">
+  <div class="story-section-video-bg">
+    <video autoplay muted loop playsinline class="story-section-video">
+      <source src="{{ url_for('static', filename='videos/header.mp4') }}" type="video/mp4">
+    </video>
+    <div class="story-section-overlay"></div>
+  </div>
   <div class="container py-5">
-    <div class="row align-items-center gy-5">
+    <div class="row align-items-center justify-content-center gy-5 ">
       <div class="col-lg-6 " >
-        <div class="card shadow-sm animate-fade-in rounded-4">
+        <div class="card shadow-sm animate-fade-in rounded-4 story-card rounded-4 shadow-sm h-100 p-4 hover-lift">
           <div class="card-body p-5">
-            <h3 class="card-title mb-4">Student & Admin Portal</h3>
-            <p class="text-muted mb-4">Use your student or admin account to access the portal. Faculty users do not have portal access in this version.</p>
-            <form action="" method="post">
+            <h3 class="card-title mb-4 text-white text-center text-bold">Student & Admin Portal</h3>
+            <p class=" mb-4 text-white text-center">Use your Admin or Student account to access the portal.</p>
+            <form action="{{ url_for('auth.login') }}" method="post">
               <div class="mb-3">
-                <label class="form-label">Email</label>
-                <input type="email" class="form-control" name="email" required>
+                <label class="form-label text-white">Email</label>
+                <input type="textmail" class="form-control" name="email" required>
               </div>
               <div class="mb-3">
-                <label class="form-label">Password</label>
-                <input type="password" class="form-control" name="password" required>
+                <label class="form-label text-white">Password</label>
+                <input type="password" class="form-control " name="password" required>
               </div>
-              <button type="submit" class="btn btn-primary w-100">Sign In</button>
+              <button type="submit" class="btn btn-dark w-100">SIGN IN</button>
             </form>
           </div>
         </div>
       </div>
-      <div class="col-lg-6 ">
-        <div class="hero-image-card rounded-4 overflow-hidden shadow-xl position-relative justify-content-center align-items-center d-flex">
-          <img src="https://www.jsafc.edu.cn/images/kouhao.jpg" class="img-fluid" alt="University campus entrance">
-        </div>
-      </div>
-    </div>
   </div>
 </section>
 {% endblock %}
+
