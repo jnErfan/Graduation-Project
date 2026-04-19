@@ -1,12 +1,13 @@
 from flask import Blueprint, render_template
-from models import get_news, get_events, get_programs, get_admissions, get_notices, get_testimonials, get_campus_landscapes, get_teachers_authorities
+from models import get_news, get_events, get_programs, get_admissions, query_db
 
 public_bp = Blueprint('public', __name__)
 
 
 @public_bp.route('/')
 def home():
-    return render_template('public/home.html')
+    programs = get_programs()
+    return render_template('public/home.html', programs=programs)
 
 
 @public_bp.route('/about')
@@ -24,31 +25,12 @@ def admissions():
 @public_bp.route('/academics')
 def academics():
     programs = get_programs()
-    notices = get_notices()
-    return render_template('public/academics.html', programs=programs, notices=notices)
+    return render_template('public/academics.html', programs=programs)
 
 
 @public_bp.route('/faculty')
 def faculty():
     return render_template('public/faculty.html')
-
-
-@public_bp.route('/campus-landscape')
-def campus_landscape():
-    landscapes = get_campus_landscapes()
-    return render_template('public/campus_landscape.html', landscapes=landscapes)
-
-
-@public_bp.route('/teachers-authority')
-def teachers_authority():
-    authorities = get_teachers_authorities()
-    return render_template('public/teachers_authority.html', authorities=authorities)
-
-
-@public_bp.route('/student-life')
-def student_life():
-    testimonials = get_testimonials()
-    return render_template('public/student_life.html', testimonials=testimonials)
 
 
 @public_bp.route('/campus-facilities')

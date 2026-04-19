@@ -2,7 +2,8 @@
 {% block title %}JSAFC{% endblock %}
 {% block content %}
 <section class="hero-landing overflow-hidden">
-  <div class="container py-5">
+   
+  <div class="container ">
     <div class="row align-items-center gy-5">
       <div class="col-lg-6">
         <span class="eyebrow text-primary fw-semibold">Jiangsu Vocational College of Agriculture and Forestry</span>
@@ -15,19 +16,19 @@
         <div class="row g-3 mt-5  stats-row hero-stat-card bg-white shadow-sm  rounded-1  pb-3 text-center">
           <div class="col-sm-4">
             <div class="">
-              <h2 class="mb-1">96%</h2>
+              <h2 class="mb-1 counter-number" data-target="96">0</h2><span>%</span>
               <p class="mb-0 text-muted">EMPLOYMENT RATE</p>
             </div>
           </div>
           <div class="col-sm-4">
             <div class="">
-              <h2 class="mb-1">12:1</h2>
+              <h2 class="mb-1 counter-number" data-target="12">0</h2><span>%</span>
               <p class="mb-0 text-muted">TEACHERS RATIO</p>
             </div>
           </div>
           <div class="col-sm-4">
             <div class="">
-              <h2 class="mb-1">20+</h2>
+              <h2 class="mb-1 counter-number" data-target="20">0</h2>
               <p class="mb-0 text-muted">PROGRAMS</p>
             </div>
           </div>
@@ -56,7 +57,7 @@
             </div>
           </div>
           <div class="text-md-end">
-            <a href="#" class="btn btn-outline-light btn-lg">RSVP Now</a>
+            <a href="{{ url_for('public.events') }}" class="btn btn-outline-light btn-lg">RSVP Now</a>
             <p class="text-white-50 mb-0 mt-2">Starts in 3 weeks</p>
     </div>
   </div>
@@ -64,42 +65,44 @@
 
 <section class="section section-light py-5">
   <div class="container">
-    <div class="row g-4">
-      <div class="col-md-3">
-        <div class="metric-card rounded-4 shadow-sm h-100 text-center bg-white p-4">
-          <div class="value-icon mb-3"><i class="bi bi-award"></i></div>
-          <div class="metric-value">250+</div>
+    <div class="row g-4 stagger-container">
+      <div class="col-md-3 stagger-item">
+        <div class="metric-card rounded-4 shadow-sm h-100 text-center bg-white p-4 hover-lift">
+          <div class="value-icon mb-3 float-animation"><i class="bi bi-award"></i></div>
+          <div class="metric-value counter-number" data-target="250">0</div>
           <h5 class="metric-label mt-3">International Awards</h5>
           <p class="text-muted mb-0">Recognized for international student education and quality programs.</p>
         </div>
       </div>
-      <div class="col-md-3">
-        <div class="metric-card rounded-4 shadow-sm h-100 text-center bg-white p-4">
-          <div class="value-icon mb-3"><i class="bi bi-building"></i></div>
-          <div class="metric-value">8</div>
+      <div class="col-md-3 stagger-item">
+        <div class="metric-card rounded-4 shadow-sm h-100 text-center bg-white p-4 hover-lift">
+          <div class="value-icon mb-3 float-animation"><i class="bi bi-building"></i></div>
+          <div class="metric-value counter-number" data-target="8">0</div>
           <h5 class="metric-label mt-3">Campuses</h5>
           <p class="text-muted mb-0">Supporting vocational training across multiple campuses.</p>
         </div>
       </div>
-      <div class="col-md-3">
-        <div class="metric-card rounded-4 shadow-sm h-100 text-center bg-white p-4">
-          <div class="value-icon mb-3"><i class="bi bi-people"></i></div>
-          <div class="metric-value">65+</div>
+      <div class="col-md-3 stagger-item">
+        <div class="metric-card rounded-4 shadow-sm h-100 text-center bg-white p-4 hover-lift">
+          <div class="value-icon mb-3 float-animation"><i class="bi bi-people"></i></div>
+          <div class="metric-value counter-number" data-target="65">0</div>
           <h5 class="metric-label mt-3">Countries</h5>
           <p class="text-muted mb-0">Students from over 65 nations.</p>
         </div>
       </div>
-      <div class="col-md-3">
-        <div class="metric-card rounded-4 shadow-sm h-100 text-center bg-white p-4">
-          <div class="value-icon mb-3"><i class="bi bi-globe2"></i></div>
-          <div class="metric-value">Top 20</div>
-          <h5 class="metric-label mt-3">Ranked Programs</h5>
+      <div class="col-md-3 stagger-item">
+        <div class="metric-card rounded-4 shadow-sm h-100 text-center bg-white p-4 hover-lift">
+          <div class="value-icon mb-3 float-animation"><i class="bi bi-globe2"></i></div>
+          <div class="metric-value counter-number" data-target="20">0</div>
+          <h5 class="metric-label mt-3">Top Ranked Programs</h5>
           <p class="text-muted mb-0">Quality vocational programs with global recognition.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+
 
 <section class="section section-light py-5">
   <div class="container">
@@ -109,27 +112,27 @@
         <h2 class="display-5 fw-bold mb-4">Educating Minds, Inspiring Hearts</h2>
         <p class="lead text-secondary mb-5">JSAFC & Its International Education School</p>
 
-        <div class="timeline-list">
+        <div class="timeline-list stagger-container">
           <div class="timeline-item mb-4">
             <div class="timeline-date">1923</div>
             <p>Founded: 1923 — one of China’s oldest vocational institutions with a long history in agricultural and technical education.</p>
           </div>
-          <div class="timeline-item mb-4">
+          <div class="timeline-item mb-4 stagger-item">
             <div class="timeline-date">2022</div>
             <p>Awarded Advanced Collective of Education for Foreign Students in Jiangsu Province — recognition for excellence in international student support and services.</p>
           </div>
-          <div class="timeline-item mb-4">
+          <div class="timeline-item mb-4 stagger-item">
             <div class="timeline-date">2023</div>
             <p>Recognized in provincial education quality evaluations with high-level development rankings.</p>
           </div>
-          <div class="timeline-item">
+          <div class="timeline-item stagger-item">
             <div class="timeline-date">2024</div>
             <p>Received awards for student community excellence and ideological education achievements at national university events.</p>
           </div>
         </div>
       </div>
       <div class="col-lg-6">
-        <div class="rounded-4 overflow-hidden shadow-xl story-image-card">
+        <div class="rounded-4 overflow-hidden shadow-xl story-image-card stagger-item">
           <img src="{{ url_for('static', filename='images/campus.png') }}" class="img-fluid" alt="University courtyard">
         </div>
       </div>
@@ -137,13 +140,13 @@
 
     <div class="row g-4 mt-5">
       <div class="col-md-6">
-        <div class="story-card rounded-4 bg-white shadow-sm h-100 p-4">
+        <div class="story-card rounded-4 bg-white shadow-sm h-100 p-4 hover-lift">
           <h5 class="story-card-title mb-3">Our Mission</h5>
           <p class="text-muted mb-0">Empower students from around the world by providing a high-quality education that combines innovative teaching with real-world experience.</p>
         </div>
       </div>
       <div class="col-md-6">
-        <div class="story-card rounded-4 bg-white shadow-sm h-100 p-4">
+        <div class="story-card rounded-4 bg-white shadow-sm h-100 p-4 hover-lift">
           <h5 class="story-card-title mb-3">Our Vision</h5>
           <p class="text-muted mb-0">Shape future leaders who are not only experts in their fields but also culturally aware and socially responsible.</p>
         </div>
@@ -173,6 +176,108 @@
     </div>
   </div>
 </section>
+<section class="section py-5">
+  <div class="container">
+    <div class="text-center mb-5">
+      <span class="eyebrow text-primary fw-semibold">Academic Programs</span>
+      <h2 class="display-5 fw-bold mb-3">Explore Our Programs</h2>
+      <p class="text-muted mx-auto" style="max-width: 600px;">Choose from a variety of vocational programs designed to prepare you for successful careers in agriculture, forestry, and related fields.</p>
+    </div>
+    <div class="row g-4">
+      {% for program in programs[:6] %}
+      <div class="col-md-6 col-lg-4">
+        <div class="program-card rounded-4 shadow-sm h-100 bg-white p-4">
+          {% if program.image_url %}
+          <img src="{{ program.image_url }}" class="card-img-top rounded-3 mb-3" alt="{{ program.title }}">
+          {% endif %}
+          <h5 class="card-title">{{ program.title }}</h5>
+          <p class="card-text text-muted">{{ program.description[:100] }}...</p>
+          {% if program.link_url %}
+          <a href="{{ program.link_url }}" class="btn btn-outline-primary">Learn More</a>
+          {% endif %}
+        </div>
+      </div>
+      {% else %}
+      <div class="col-12">
+        <div class="alert alert-secondary text-center">Programs are being updated. Check back soon!</div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="text-center mt-5">
+      <a href="{{ url_for('public.academics') }}" class="btn btn-primary btn-lg">View All Programs</a>
+    </div>
+  </div>
+</section>
+
+<section class="section py-5 bg-light">
+  <div class="container">
+    <div class="text-center mb-5">
+      <span class="eyebrow text-primary fw-semibold">Student Voices</span>
+      <h2 class="display-5 fw-bold mb-3">What Our Students Say</h2>
+      <p class="text-muted mx-auto" style="max-width: 600px;">Hear from international students about their experiences at JSAFC and how our programs have shaped their futures.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="testimonial-card rounded-4 shadow-sm bg-white p-4 h-100">
+          <div class="d-flex align-items-center mb-3">
+            <div class="avatar-circle bg-primary text-white me-3">A</div>
+            <div>
+              <h6 class="mb-0">Ahmed, Nigeria</h6>
+              <small class="text-muted">Agriculture Program Graduate</small>
+            </div>
+          </div>
+          <p class="mb-3">"JSAFC provided me with world-class education and practical skills. The faculty's dedication and modern facilities made my learning experience exceptional. I'm now working as an agricultural consultant back home."</p>
+          <div class="rating">
+            <i class="bi bi-star-fill text-warning"></i>
+            <i class="bi bi-star-fill text-warning"></i>
+            <i class="bi bi-star-fill text-warning"></i>
+            <i class="bi bi-star-fill text-warning"></i>
+            <i class="bi bi-star-fill text-warning"></i>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="testimonial-card rounded-4 shadow-sm bg-white p-4 h-100">
+          <div class="d-flex align-items-center mb-3">
+            <div class="avatar-circle bg-success text-white me-3">M</div>
+            <div>
+              <h6 class="mb-0">Maria, Philippines</h6>
+              <small class="text-muted">Forestry Program Student</small>
+            </div>
+          </div>
+          <p class="mb-3">"The cultural diversity at JSAFC is amazing. I've made friends from over 20 countries and learned about sustainable forestry practices that I can apply in the Philippines. The scholarship support made it possible for me to study here."</p>
+          <div class="rating">
+            <i class="bi bi-star-fill text-warning"></i>
+            <i class="bi bi-star-fill text-warning"></i>
+            <i class="bi bi-star-fill text-warning"></i>
+            <i class="bi bi-star-fill text-warning"></i>
+            <i class="bi bi-star-fill text-warning"></i>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="testimonial-card rounded-4 shadow-sm bg-white p-4 h-100">
+          <div class="d-flex align-items-center mb-3">
+            <div class="avatar-circle bg-info text-white me-3">K</div>
+            <div>
+              <h6 class="mb-0">Kumar, India</h6>
+              <small class="text-muted">Horticulture Program Graduate</small>
+            </div>
+          </div>
+          <p class="mb-3">"From theory to practice, JSAFC taught me everything I needed to know about modern horticulture. The industry connections and internship opportunities were invaluable. I secured a great job right after graduation."</p>
+          <div class="rating">
+            <i class="bi bi-star-fill text-warning"></i>
+            <i class="bi bi-star-fill text-warning"></i>
+            <i class="bi bi-star-fill text-warning"></i>
+            <i class="bi bi-star-fill text-warning"></i>
+            <i class="bi bi-star-fill text-warning"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
 <section class="section py-5 bg-light rounded-4">
   <div class="container">
@@ -202,6 +307,50 @@
   </div>
 </section>
 
+<section class="section py-5 bg-primary text-white">
+  <div class="container">
+    <div class="row align-items-center gy-4">
+      <div class="col-lg-8">
+        <h2 class="display-5 fw-bold mb-3">Ready to Start Your Journey?</h2>
+        <p class="lead mb-4">Join thousands of international students who have chosen JSAFC for world-class education and unforgettable experiences.</p>
+        <div class="d-flex flex-wrap gap-3">
+          <a href="{{ url_for('public.admissions') }}" class="btn btn-light btn-lg">Apply Now</a>
+          <a href="{{ url_for('public.contact') }}" class="btn btn-outline-light btn-lg">Schedule a Visit</a>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="cta-stats rounded-4 bg-white bg-opacity-10 p-4 text-center">
+          <div class="row g-3">
+            <div class="col-6">
+              <div class="cta-stat">
+                <h3 class="mb-1">98%</h3>
+                <small>Satisfaction Rate</small>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="cta-stat">
+                <h3 class="mb-1">24/7</h3>
+                <small>Student Support</small>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="cta-stat">
+                <h3 class="mb-1">50+</h3>
+                <small>Partner Universities</small>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="cta-stat">
+                <h3 class="mb-1">100%</h3>
+                <small>English Programs</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 <section class="section py-5">
   <div class="container">
     <div class="text-center mb-5">

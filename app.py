@@ -4,7 +4,7 @@ from config import Config
 from extensions import mysql
 from routes.public import public_bp
 from routes.auth import auth_bp
-from routes.portal import portal_bp
+from routes.portal import portal_bp, current_user
 from models import ensure_portal_tables
 
 
@@ -23,6 +23,10 @@ def create_app():
     @app.context_processor
     def inject_current_year():
         return {'current_year': __import__('datetime').datetime.now().year}
+
+    @app.context_processor
+    def inject_current_user():
+        return {'current_user': current_user()}
 
     return app
 

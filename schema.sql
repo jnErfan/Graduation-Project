@@ -126,6 +126,38 @@ CREATE TABLE admissions (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Student testimonials
+CREATE TABLE testimonials (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  student_id INT NOT NULL,
+  content TEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (student_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- Teachers and authority information
+CREATE TABLE teachers_authority (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(128) NOT NULL,
+  position VARCHAR(128) NOT NULL,
+  department VARCHAR(128),
+  email VARCHAR(128),
+  phone VARCHAR(32),
+  bio TEXT,
+  image_url VARCHAR(255),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Campus landscape information
+CREATE TABLE campus_landscape (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  title VARCHAR(128) NOT NULL,
+  description TEXT,
+  image_url VARCHAR(255),
+  category VARCHAR(64), -- e.g., 'buildings', 'gardens', 'facilities'
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 -- Insert default roles
 INSERT INTO roles (name, description) VALUES
 ('student', 'Student account with access to registration, attendance, and results'),

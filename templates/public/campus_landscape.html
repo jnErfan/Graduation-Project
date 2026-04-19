@@ -17,8 +17,15 @@
     <div class="col-md-6">
       <div class="card shadow-sm border-0 overflow-hidden rounded-4 h-100">
         {% if item.image_url %}
-        <img src="{{ item.image_url }}" class="card-img-top" alt="Campus landscape image">
+        <img src="{{ item.image_url }}" class="card-img-top" alt="{{ item.title }}">
         {% endif %}
+        <div class="card-body">
+          <h3 class="h5 mb-2">{{ item.title }}</h3>
+          {% if item.subtitle %}
+          <h4 class="h6 text-primary mb-3">{{ item.subtitle }}</h4>
+          {% endif %}
+          <p class="text-muted">{{ item.description }}</p>
+        </div>
       </div>
     </div>
     {% else %}

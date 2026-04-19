@@ -11,7 +11,11 @@
   <div class="card-body">
     <form method="post">
       <div class="row g-3">
+        <div class="col-md-6"><input class="form-control" name="title" placeholder="Title" required></div>
+        <div class="col-md-6"><input class="form-control" name="subtitle" placeholder="Subtitle"></div>
+        <div class="col-md-12"><textarea class="form-control" name="description" rows="3" placeholder="Description" required></textarea></div>
         <div class="col-md-6"><input class="form-control" name="image_url" placeholder="Image URL"></div>
+        <div class="col-md-6"><input class="form-control" name="link_url" placeholder="Link URL"></div>
         <div class="col-md-12"><button class="btn btn-primary">Add Campus Landscape Item</button></div>
       </div>
     </form>
@@ -19,11 +23,13 @@
 </div>
 <div class="table-responsive">
   <table class="table table-striped align-middle">
-    <thead><tr><th>Image URL</th><th>Created</th><th class="text-end">Actions</th></tr></thead>
+    <thead><tr><th>Title</th><th>Description</th><th>Image</th><th>Created</th><th class="text-end">Actions</th></tr></thead>
     <tbody>
-      {% for item in landscapes %}
+      {% for item in items %}
       <tr>
-        <td><a href="{{ item.image_url }}" target="_blank" class="text-truncate d-inline-block" style="max-width: 320px;">{{ item.image_url }}</a></td>
+        <td>{{ item.title }}</td>
+        <td>{{ item.description[:50] }}{% if item.description|length > 50 %}...{% endif %}</td>
+        <td>{% if item.image_url %}<a href="{{ item.image_url }}" target="_blank">View Image</a>{% else %}No image{% endif %}</td>
         <td>{{ item.created_at }}</td>
         <td class="text-end">
           <a href="{{ url_for('portal.edit_campus_landscape', landscape_id=item.id) }}" class="btn btn-sm btn-secondary">Edit</a>
@@ -31,7 +37,7 @@
         </td>
       </tr>
       {% else %}
-      <tr><td colspan="3">No campus landscape entries found.</td></tr>
+      <tr><td colspan="5">No campus landscape entries found.</td></tr>
       {% endfor %}
     </tbody>
   </table>
